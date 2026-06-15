@@ -966,7 +966,7 @@ export default function App() {
               <div>
                 <p className="section-eyebrow">About Me</p>
                 <h2 className="about-heading" id="about-heading">
-                  I build things<br />for the web.
+                  I create things<br />for the web.
                 </h2>
                 <p className="about-para">
                   I'm a <strong>full-stack software engineer</strong> based in San Francisco with a passion for crafting performant, accessible, and beautifully designed digital experiences. I specialize in the intersection of engineering rigor and thoughtful UX.
