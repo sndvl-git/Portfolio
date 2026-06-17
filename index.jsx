@@ -882,7 +882,7 @@ export default function App() {
 
       <header id="site-header">
         <div className="header-inner">
-          <a href="#hero" className="logo">ar<span>.</span></a>
+          <a href="#hero" className="logo">LS<span>.</span></a>
 
           <button
             className="nav-toggle"
