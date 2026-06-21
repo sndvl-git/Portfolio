@@ -137,7 +137,7 @@ export default function App() {
                   <a href="https://www.linkedin.com/in/lanz-sandoval-12b876416/" className="social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                     <i className="fa-brands fa-linkedin-in" />
                   </a>
-                  <a href="https://www.facebook.com/Z.Sndvl" className="social-link" target="_blank" rel="noopener noreferrer" aria-label="Facebooks">
+                  <a href="https://www.facebook.com/Z.Sndvl" className="social-link" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                     <i className="fa-brands fa-facebook" />
                   </a>
                   <a href="mailto:lanzerrol.sandoval@gmail.com" className="social-link" aria-label="Email">
@@ -179,26 +179,26 @@ export default function App() {
                 </div>
               </div>
 
-              <div class="about-stats" aria-label="Career highlights">
-                <div class="stat-card">
-                  <div class="stat-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+              <div className="about-stats" aria-label="Career highlights">
+                <div className="stat-card">
+                  <div className="stat-icon"><i className="fa-solid fa-graduation-cap"></i></div>
                   <div>
-                    <div class="stat-num">BS '26</div>
-                    <div class="stat-desc">Bachelor of Science in Computer Engineering from University of Batangas</div>
+                    <div className="stat-num">BS '26</div>
+                    <div className="stat-desc">Bachelor of Science in Computer Engineering from University of Batangas</div>
                   </div>
                 </div>
-                <div class="stat-card">
-                  <div class="stat-icon"><i class="fa-solid fa-certificate"></i></div>
+                <div className="stat-card">
+                  <div className="stat-icon"><i className="fa-solid fa-certificate"></i></div>
                   <div>
-                    <div class="stat-num">5+</div>
-                    <div class="stat-desc">Industry certifications including CCNA and Cisco Networking credentials</div>
+                    <div className="stat-num">5+</div>
+                    <div className="stat-desc">Industry certifications including CCNA and Cisco Networking credentials</div>
                   </div>
                 </div>
-                <div class="stat-card">
-                  <div class="stat-icon"><i class="fa-solid fa-microchip"></i></div>
+                <div className="stat-card">
+                  <div className="stat-icon"><i className="fa-solid fa-microchip"></i></div>
                   <div>
-                    <div class="stat-num">IoT</div>
-                    <div class="stat-desc">Hands-on experience with ESP32, sensors, and embedded systems design</div>
+                    <div className="stat-num">IoT</div>
+                    <div className="stat-desc">Hands-on experience with ESP32, sensors, and embedded systems design</div>
                   </div>
                 </div>
               </div>
@@ -211,38 +211,38 @@ export default function App() {
                 <p className="section-eyebrow">Featured Work</p>
                 <h2 className="section-heading" id="projects-heading">Recent Projects</h2>
               </div>
-              <a href="#" className="view-all">View all <i className="fa-solid fa-arrow-right" /></a>
+              <a href="#projects" className="view-all">View all <i className="fa-solid fa-arrow-right" /></a>
             </div>
 
             <div className="projects-grid">
 
-              <article class="project-card">
-                <div class="project-top">
-                  <div class="project-icon"><i class="fa-solid fa-water"></i></div>
-                  <div class="project-links">
-                    <a href="#" aria-label="Live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              <article className="project-card">
+                <div className="project-top">
+                  <div className="project-icon"><i className="fa-solid fa-water"></i></div>
+                  <div className="project-links">
+                    <a href="#" aria-label="Live demo"><i className="fa-solid fa-arrow-up-right-from-square"></i></a>
                   </div>
                 </div>
-                <h3 class="project-name">Smart Pipeline Monitor</h3>
-                <p class="project-desc">IoT-based real-time leak detection system for water pipelines using flow sensors, microcontroller processing, and GSM-based SMS alerts.</p>
-                <div class="project-tags">
-                  <span class="tag">ESP32</span>
-                  <span class="tag">IoT</span>
-                  <span class="tag">Sensors</span>
-                  <span class="tag">GSM</span>
+                <h3 className="project-name">Smart Pipeline Monitor</h3>
+                <p className="project-desc">IoT-based real-time leak detection system for water pipelines using flow sensors, microcontroller processing, and GSM-based SMS alerts.</p>
+                <div className="project-tags">
+                  <span className="tag">ESP32</span>
+                  <span className="tag">IoT</span>
+                  <span className="tag">Sensors</span>
+                  <span className="tag">GSM</span>
                 </div>
               </article>
               
-              <article class="project-card">
-                <div class="project-top">
-                  <div class="project-icon"><i class="fa-solid fa-wrench"></i></div>
+              <article className="project-card">
+                <div className="project-top">
+                  <div className="project-icon"><i className="fa-solid fa-wrench"></i></div>
                 </div>
-                <h3 class="project-name">Hardware Troubleshooting</h3>
-                <p class="project-desc">Hands-on experience with computer repair, diagnostics, and network infrastructure — PC maintenance, laptop troubleshooting, and ethernet setup.</p>
-                <div class="project-tags">
-                  <span class="tag">PC Repair</span>
-                  <span class="tag">Networking</span>
-                  <span class="tag">Hardware</span>
+                <h3 className="project-name">Hardware Troubleshooting</h3>
+                <p className="project-desc">Hands-on experience with computer repair, diagnostics, and network infrastructure — PC maintenance, laptop troubleshooting, and ethernet setup.</p>
+                <div className="project-tags">
+                  <span className="tag">PC Repair</span>
+                  <span className="tag">Networking</span>
+                  <span className="tag">Hardware</span>
                 </div>
               </article>
               
