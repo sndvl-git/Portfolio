@@ -122,23 +122,23 @@ export default function App() {
 
                 <p className="hero-location">
                   <i className="fa-solid fa-location-dot" aria-hidden="true" />
-                 Bauan Batangas, Philippines &nbsp;·&nbsp; UTC−8
+                 Bauan, Batangas, Philippines &nbsp;·&nbsp; UTC−8
                 </p>
 
                 <div className="hero-title">
-                  Software Engineer
+                  Computer Engineer
                   <span className="title-chip">Fresh Graduate</span>
                 </div>
 
                 <div className="hero-social" aria-label="Social links">
-                  <a href="https://github.com" className="social-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                  <a href="https://github.com/sndvl-git" className="social-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                     <i className="fa-brands fa-github" />
                   </a>
-                  <a href="https://linkedin.com" className="social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                  <a href="https://www.linkedin.com/in/lanz-sandoval-12b876416/" className="social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                     <i className="fa-brands fa-linkedin-in" />
                   </a>
-                  <a href="https://twitter.com" className="social-link" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">
-                    <i className="fa-brands fa-x-twitter" />
+                  <a href="https://www.facebook.com/Z.Sndvl" className="social-link" target="_blank" rel="noopener noreferrer" aria-label="Facebooks">
+                    <i className="fa-brands fa-facebook" />
                   </a>
                   <a href="mailto:lanzerrol.sandoval@gmail.com" className="social-link" aria-label="Email">
                     <i className="fa-regular fa-envelope" />
@@ -153,50 +153,52 @@ export default function App() {
               <div>
                 <p className="section-eyebrow">About Me</p>
                 <h2 className="about-heading" id="about-heading">
-                  I create things<br />for the web.
+                  Building<br />Smart Solutions.
                 </h2>
                 <p className="about-para">
-                  I'm a <strong>full-stack software engineer</strong> based in San Francisco with a passion for crafting performant, accessible, and beautifully designed digital experiences. I specialize in the intersection of engineering rigor and thoughtful UX.
+                  I am a <strong>full stack web developer</strong>  from the Philippines and a recent graduate with a <strong>BS in Computer Engineering</strong>. 
+                  I build fast, accessible, and easy to use web applications that solve real problems for users. I write clean, maintainable code and I am eager to learn new tools and best practices to improve my work and grow my skills.
                 </p>
                 <p className="about-para">
-                  Over the past five years I've shipped production systems across startups and mid-size companies — from real-time collaborative editors to high-throughput data pipelines. I care deeply about code that lasts: <strong>well-tested, well-documented, and well-reasoned</strong>.
+                  I work well in teams, communicate clearly, and welcome feedback that helps me improve. I am determined to grow as a developer and help the company succeed while developing my hardware skills. <strong>I am eager to learn from colleagues and contribute to projects</strong> where I can gain hands-on experience.
                 </p>
                 <p className="about-para">
-                  When I'm not at the keyboard, you'll find me hiking coastal trails, contributing to open-source, or nerding out about type design.
+                  In my free time I stay active, study open source projects, practice new skills, and tinker with PC hardware and electronics to strengthen both my software and hardware abilities.
                 </p>
                 <p className="skills-label">Core toolkit</p>
                 <div className="skill-chips">
-                  <span className="chip">TypeScript</span>
+                  <span className="chip">Microcontrollers</span>
+                  <span className="chip">JavaScript</span>
+                  <span className="chip">Node.js</span>                
                   <span className="chip">React</span>
-                  <span className="chip">Next.js</span>
-                  <span className="chip">Node.js</span>
-                  <span className="chip">PostgreSQL</span>
-                  <span className="chip">Go</span>
-                  <span className="chip">Docker</span>
-                  <span className="chip">AWS</span>
+                  <span className="chip">C++</span>
+                  <span className="chip">Git</span>
+                  <span className="chip">HTML/CSS</span>
+                  <span className="chip">Python</span>
+                  <span className="chip">CISCO Networking</span>
                 </div>
               </div>
 
-              <div className="about-stats" aria-label="Career highlights">
-                <div className="stat-card">
-                  <div className="stat-icon"><i className="fa-solid fa-rocket" /></div>
+              <div class="about-stats" aria-label="Career highlights">
+                <div class="stat-card">
+                  <div class="stat-icon"><i class="fa-solid fa-graduation-cap"></i></div>
                   <div>
-                    <div className="stat-num">30+</div>
-                    <div className="stat-desc">Production projects shipped across SaaS, fintech, and developer tooling</div>
+                    <div class="stat-num">BS '26</div>
+                    <div class="stat-desc">Bachelor of Science in Computer Engineering from University of Batangas</div>
                   </div>
                 </div>
-                <div className="stat-card">
-                  <div className="stat-icon"><i className="fa-solid fa-star" /></div>
+                <div class="stat-card">
+                  <div class="stat-icon"><i class="fa-solid fa-certificate"></i></div>
                   <div>
-                    <div className="stat-num">4.2k</div>
-                    <div className="stat-desc">GitHub stars across open-source libraries and developer tools</div>
+                    <div class="stat-num">5+</div>
+                    <div class="stat-desc">Industry certifications including CCNA and Cisco Networking credentials</div>
                   </div>
                 </div>
-                <div className="stat-card">
-                  <div className="stat-icon"><i className="fa-solid fa-users" /></div>
+                <div class="stat-card">
+                  <div class="stat-icon"><i class="fa-solid fa-microchip"></i></div>
                   <div>
-                    <div className="stat-num">12</div>
-                    <div className="stat-desc">Engineers mentored and onboarded at previous roles</div>
+                    <div class="stat-num">IoT</div>
+                    <div class="stat-desc">Hands-on experience with ESP32, sensors, and embedded systems design</div>
                   </div>
                 </div>
               </div>
@@ -207,13 +209,43 @@ export default function App() {
             <div className="section-header">
               <div>
                 <p className="section-eyebrow">Featured Work</p>
-                <h2 className="section-heading" id="projects-heading">Selected Projects</h2>
+                <h2 className="section-heading" id="projects-heading">Recent Projects</h2>
               </div>
               <a href="#" className="view-all">View all <i className="fa-solid fa-arrow-right" /></a>
             </div>
 
             <div className="projects-grid">
 
+              <article class="project-card">
+                <div class="project-top">
+                  <div class="project-icon"><i class="fa-solid fa-water"></i></div>
+                  <div class="project-links">
+                    <a href="#" aria-label="Live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                  </div>
+                </div>
+                <h3 class="project-name">Smart Pipeline Monitor</h3>
+                <p class="project-desc">IoT-based real-time leak detection system for water pipelines using flow sensors, microcontroller processing, and GSM-based SMS alerts.</p>
+                <div class="project-tags">
+                  <span class="tag">ESP32</span>
+                  <span class="tag">IoT</span>
+                  <span class="tag">Sensors</span>
+                  <span class="tag">GSM</span>
+                </div>
+              </article>
+              
+              <article class="project-card">
+                <div class="project-top">
+                  <div class="project-icon"><i class="fa-solid fa-wrench"></i></div>
+                </div>
+                <h3 class="project-name">Hardware Troubleshooting</h3>
+                <p class="project-desc">Hands-on experience with computer repair, diagnostics, and network infrastructure — PC maintenance, laptop troubleshooting, and ethernet setup.</p>
+                <div class="project-tags">
+                  <span class="tag">PC Repair</span>
+                  <span class="tag">Networking</span>
+                  <span class="tag">Hardware</span>
+                </div>
+              </article>
+              
               <article className="project-card">
                 <div className="project-top">
                   <div className="project-icon"><i className="fa-solid fa-chart-line" /></div>
@@ -223,7 +255,7 @@ export default function App() {
                   </div>
                 </div>
                 <h3 className="project-name">Vicmar Homes</h3>
-                <p className="project-desc">Find your dream home with Vicmar Homes — where tradition meets modern Filipino living.</p>
+                <p className="project-desc">Fixed and debugged property listings on the website, added a contact feature to reach the CEO directly for unit availability, and implemented several UI tweaks.</p>
                 <div className="project-tags">
                   <span className="tag">HTML</span>
                   <span className="tag">CSS</span>
@@ -241,7 +273,7 @@ export default function App() {
                   </div>
                 </div>
                 <h3 className="project-name">Digiscribe</h3>
-                <p className="project-desc">A Philippine-based Medical Transcription Company Serving the Information Technology Enabled Services (ITES) Sector.</p>
+                <p className="project-desc">Developed a responsive website for Digiscribe Transcription Corp., implementing modern web design practices and user-friendly interfaces.</p>
                 <div className="project-tags">
                   <span className="tag">HTML</span>
                   <span className="tag">CSS</span>
@@ -271,9 +303,9 @@ export default function App() {
         <div className="footer-inner">
           <p className="footer-copy">©2026 Lanz Errol P. Sandoval. All rights reserved.</p>
           <nav className="footer-social" aria-label="Footer social links">
-            <a href="#" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://github.com/sndvl-git" target="_blank" rel="noopener noreferrer">GitHub</a>
             <a href="https://www.linkedin.com/in/lanz-sandoval-12b876416/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="#" target="_blank" rel="noopener noreferrer">Jobstreet</a>
+            <a href="https://ph.jobstreet.com/profile/me" target="_blank" rel="noopener noreferrer">Jobstreet</a>
             <a href="mailto:lanzerrol.sandoval@gmail.com">Email</a>
           </nav>
         </div>
