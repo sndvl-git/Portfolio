@@ -254,10 +254,9 @@
         }
 
         #hero {
-          min-height: calc(100vh - var(--nav-h));
+          min-height: calc(100vh);
           display: flex;
           align-items: center;
-          padding: 4rem 0;
           border-bottom: 1px solid var(--border);
         }
 
@@ -288,17 +287,6 @@
           padding: 3px;
           background: linear-gradient(135deg, var(--accent), var(--amber));
           position: relative;
-        }
-
-        .hero-photo-ring::after {
-          content: '';
-          position: absolute;
-          inset: -8px;
-          border-radius: 50%;
-          background: var(--accent-glow);
-          filter: blur(18px);
-          z-index: -1;
-          animation: pulse-glow 3s ease-in-out infinite;
         }
 
         @keyframes pulse-glow {
