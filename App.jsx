@@ -66,11 +66,11 @@ export default function App() {
           <div className="loader-bar" />
         </div>
       </div>
-
+      
       <header id="site-header">
+        
         <div className="header-inner">
           <a href="#hero" className="logo">LS<span>.</span></a>
-
           <button
             className="nav-toggle"
             aria-label="Toggle navigation"
@@ -172,6 +172,7 @@ export default function App() {
                   <span className="chip">Node.js</span>                
                   <span className="chip">React</span>
                   <span className="chip">C++</span>
+                  <span className="chip">C#</span>
                   <span className="chip">Git</span>
                   <span className="chip">HTML/CSS</span>
                   <span className="chip">Python</span>
