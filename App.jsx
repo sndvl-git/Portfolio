@@ -222,7 +222,7 @@ export default function App() {
                 <div className="project-top">
                   <div className="project-icon"><i className="fa-solid fa-water"></i></div>
                   <div className="project-links">
-                    <a href="#" aria-label="Live demo"><i className="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    <a href="https://water-monitoring-dashboard-six.vercel.app/" aria-label="Live demo"><i className="fa-solid fa-arrow-up-right-from-square"></i></a>
                   </div>
                 </div>
                 <h3 className="project-name">Smart Pipeline Monitor</h3>
