@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "npm run build && gh-pages -d dist"
+    "prepare:pages": "node scripts/prepare-pages.cjs",
+    "deploy": "npm run build && npm run prepare:pages"
   },
   "dependencies": {
     "react": "^18.3.1",
