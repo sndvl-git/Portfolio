@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './styles.css';
+import profile from "./assets/muka.png";
 
 export default function App() {
   const [navOpen, setNavOpen] = useState(false);
@@ -102,7 +103,7 @@ export default function App() {
               <div className="hero-photo-wrap" id="hero-photo" aria-hidden="true">
                 <div className="hero-photo-ring">
                   <img
-                    src="/assets/muka.png"
+                    src={profile}
                     alt="Lanz Sandoval — profile photo"
                     width="240"
                     height="240"
