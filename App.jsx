@@ -141,7 +141,7 @@ export default function App() {
                   <a href="https://www.facebook.com/Z.Sndvl" className="social-link" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                     <i className="fa-brands fa-facebook" />
                   </a>
-                  <a href="mailto:lanzerrol.sandoval@gmail.com" className="social-link" aria-label="Email">
+                  <a href="#contact" className="social-link" aria-label="Email">
                     <i className="fa-regular fa-envelope" />
                   </a>
                 </div>
