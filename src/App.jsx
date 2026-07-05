@@ -4,6 +4,12 @@ import profile from "./assets/muka.png";
 
 export default function App() {
   const [navOpen, setNavOpen] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    address: '',
+    message: '',
+  });
 
   useEffect(() => {
     const preloader = document.getElementById('preloader');
@@ -57,7 +63,38 @@ export default function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') {
+        setIsContactOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, []);
+
   const closeNav = () => setNavOpen(false);
+  const openContactModal = () => setIsContactOpen(true);
+  const closeContactModal = () => setIsContactOpen(false);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((current) => ({ ...current, [name]: value }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const subject = encodeURIComponent(`New contact from ${formData.name || 'a visitor'}`);
+    const body = encodeURIComponent(
+      `Name: ${formData.name || 'Not provided'}\nAddress: ${formData.address || 'Not provided'}\n\nMessage:\n${formData.message || 'No message provided'}`
+    );
+
+    window.location.href = `mailto:lanzerrol.sandoval@gmail.com?subject=${subject}&body=${body}`;
+    closeContactModal();
+    setFormData({ name: '', address: '', message: '' });
+  };
 
   return (
     <>
@@ -89,10 +126,17 @@ export default function App() {
             <a href="#contact" onClick={closeNav}>Contact</a>
           </nav>
 
-          <a href="#contact" className="btn-contact" onClick={closeNav}>
+          <button
+            type="button"
+            className="btn-contact"
+            onClick={() => {
+              closeNav();
+              openContactModal();
+            }}
+          >
             <i className="fa-regular fa-paper-plane" aria-hidden="true" />
             Contact Me
-          </a>
+          </button>
         </div>
       </header>
 
@@ -292,14 +336,79 @@ export default function App() {
               <p className="contact-sub">
                 Whether you have a project in mind, a role to discuss, or just want to say hello, my inbox is always open.
               </p>
-              <a href="mailto:lanzerrol.sandoval@gmail.com" className="btn-primary">
+              <button type="button" className="btn-primary" onClick={openContactModal}>
                 <i className="fa-regular fa-paper-plane" aria-hidden="true" />
                 Say Hello
-              </a>
+              </button>
             </div>
           </section>
         </div>
       </main>
+
+      {isContactOpen && (
+        <div className="contact-modal-backdrop" role="presentation" onClick={closeContactModal}>
+          <div
+            className="contact-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="contact-modal-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button type="button" className="modal-close" onClick={closeContactModal} aria-label="Close contact dialog">
+              <i className="fa-solid fa-xmark" aria-hidden="true" />
+            </button>
+
+            <p className="section-eyebrow">Contact form</p>
+            <h3 id="contact-modal-title">Get in touch</h3>
+            <p className="modal-copy">
+              Share a few details below and I’ll receive your message directly in my inbox.
+            </p>
+
+            <form className="contact-form" onSubmit={handleSubmit}>
+              <label>
+                <span>Name</span>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  placeholder="Your name"
+                  required
+                />
+              </label>
+
+              <label>
+                <span>Address</span>
+                <input
+                  type="text"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleInputChange}
+                  placeholder="Your address"
+                  required
+                />
+              </label>
+
+              <label>
+                <span>Message</span>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  placeholder="Tell me what you need"
+                  rows="5"
+                  required
+                />
+              </label>
+
+              <button type="submit" className="btn-primary form-submit">
+                <i className="fa-regular fa-paper-plane" aria-hidden="true" />
+                Get in Touch
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
 
       <footer>
         <div className="footer-inner">
