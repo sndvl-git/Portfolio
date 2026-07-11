@@ -266,7 +266,7 @@ export default function App() {
                 <div className="project-top">
                   <div className="project-icon"><i className="fa-solid fa-water"></i></div>
                   <div className="project-links">
-                    <a href="#" aria-label="Live demo"><i className="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    <a href="https://water-monitoring-dashboard-six.vercel.app/" aria-label="Live demo"><i className="fa-solid fa-arrow-up-right-from-square"></i></a>
                   </div>
                 </div>
                 <h3 className="project-name">Smart Pipeline Monitor</h3>
@@ -297,7 +297,7 @@ export default function App() {
                   <div className="project-icon"><i className="fa-solid fa-chart-line" /></div>
                   <div className="project-links">
                     <a href="#" aria-label="GitHub repo"><i className="fa-brands fa-github" /></a>
-                    <a href="#" aria-label="Live demo"><i className="fa-solid fa-arrow-up-right-from-square" /></a>
+                    <a href="http://vicmarhomes.com/" aria-label="Live demo"><i className="fa-solid fa-arrow-up-right-from-square" /></a>
                   </div>
                 </div>
                 <h3 className="project-name">Vicmar Homes</h3>
@@ -315,7 +315,7 @@ export default function App() {
                   <div className="project-icon"><i className="fa-solid fa-terminal" /></div>
                   <div className="project-links">
                     <a href="#" aria-label="GitHub repo"><i className="fa-brands fa-github" /></a>
-                    <a href="#" aria-label="Live demo"><i className="fa-solid fa-arrow-up-right-from-square" /></a>
+                    <a href="https://www.digiscribeasiapacific.com/" aria-label="Live demo"><i className="fa-solid fa-arrow-up-right-from-square" /></a>
                   </div>
                 </div>
                 <h3 className="project-name">Digiscribe</h3>

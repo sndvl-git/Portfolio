@@ -257,10 +257,16 @@
         }
 
         #hero {
-          min-height: calc(100vh);
+          min-height: auto;
           display: flex;
           align-items: center;
+          padding: 6rem 0;
           border-bottom: 1px solid var(--border);
+        }
+        @media (min-width: 768px) {
+          #hero {
+            min-height: calc(50vh - var(--nav-h));
+          }
         }
 
         .hero-inner {
