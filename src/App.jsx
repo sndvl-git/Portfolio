@@ -201,7 +201,7 @@ export default function App() {
                   Building<br />Smart Solutions.
                 </h2>
                 <p className="about-para">
-                  I am a <strong>full stack web developer</strong>  from the Philippines and a recent graduate with a <strong>BS in Computer Engineering</strong>. 
+                  I am a <strong>Website Developer</strong>  from the Philippines and a recent graduate with a <strong>BS in Computer Engineering</strong>. 
                   I build fast, accessible, and easy to use web applications that solve real problems for users. I write clean, maintainable code and I am eager to learn new tools and best practices to improve my work and grow my skills.
                 </p>
                 <p className="about-para">
