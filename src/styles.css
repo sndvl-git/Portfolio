@@ -1,14 +1,14 @@
 
         :root {
-          --bg:         #0A0F1E;
-          --bg-card:    #111827;
-          --bg-surface: #1A2235;
-          --text:       #F0EDE8;
-          --text-muted: #8892A4;
-          --accent:     #6366F1;
-          --accent-glow:rgba(99,102,241,0.25);
-          --amber:      #F59E0B;
-          --border:     rgba(255,255,255,0.07);
+          --bg:         #f3f4f6;
+          --bg-card:    #ffffff;
+          --bg-surface: #e5e7eb;
+          --text:       #111827;
+          --text-muted: #6b7280;
+          --accent:     #374151;
+          --accent-glow: rgba(17, 24, 39, 0.08);
+          --amber:      #4b5563;
+          --border:     rgba(17, 24, 39, 0.09);
           --max-w:      1200px;
           --nav-h:      72px;
           --radius:     14px;
@@ -41,7 +41,7 @@
           position: fixed;
           inset: 0;
           z-index: 9999;
-          background: var(--bg);
+          background: #ffffff;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -108,7 +108,7 @@
           top: 0;
           z-index: 100;
           height: var(--nav-h);
-          background: rgba(10,15,30,0.82);
+          background: rgba(255, 255, 255, 0.82);
           backdrop-filter: blur(18px);
           -webkit-backdrop-filter: blur(18px);
           border-bottom: 1px solid var(--border);
@@ -197,7 +197,7 @@
         .btn-contact:hover {
           background: var(--amber);
           transform: translateY(-1px);
-          box-shadow: 0 6px 20px rgba(245,158,11,0.35);
+          box-shadow: 0 6px 20px rgba(17, 24, 39, 0.12);
         }
 
         .nav-toggle {
@@ -274,6 +274,9 @@
           align-items: center;
           gap: clamp(2.5rem, 6vw, 5rem);
           width: 100%;
+          max-width: var(--max-w);
+          margin: 0 auto;
+          padding: 0 clamp(1.25rem, 4vw, 3rem);
         }
 
         .hero-photo-wrap {
@@ -632,7 +635,7 @@
         .project-card:hover {
           border-color: var(--accent);
           transform: translateY(-4px);
-          box-shadow: 0 16px 40px rgba(0,0,0,0.35), 0 0 0 1px rgba(99,102,241,0.15);
+          box-shadow: 0 16px 40px rgba(17, 24, 39, 0.08), 0 0 0 1px rgba(17, 24, 39, 0.06);
         }
 
         .project-top {
@@ -863,7 +866,7 @@
         .btn-primary:hover {
           background: var(--amber);
           transform: translateY(-2px);
-          box-shadow: 0 10px 30px rgba(245,158,11,0.4);
+          box-shadow: 0 10px 30px rgba(17, 24, 39, 0.12);
         }
 
         footer {
