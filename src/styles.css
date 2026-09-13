@@ -27,10 +27,6 @@
           overflow-x: hidden;
         }
 
-        @media (prefers-reduced-motion: reduce) {
-          *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-        }
-
         .page-wrapper {
           max-width: var(--max-w);
           margin: 0 auto;
