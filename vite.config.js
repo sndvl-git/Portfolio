@@ -5,7 +5,7 @@ const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? 'Portfolio';
 
 export default defineConfig({
   plugins: [react()],
-  base: './',
+  base: process.env.GITHUB_ACTIONS ? `/${repoName}/` : '/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',

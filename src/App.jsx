@@ -41,7 +41,7 @@ export default function App() {
       if (heroSocial) setTimeout(() => heroSocial.classList.add('visible'), 880);
     };
 
-    const revealEls = document.querySelectorAll('#about, #projects, #contact');
+    const revealEls = document.querySelectorAll('#about, #projects, #contact, [data-reveal]');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -53,8 +53,8 @@ export default function App() {
 
     revealEls.forEach(el => observer.observe(el));
 
-    const mainTimer = window.setTimeout(triggerEntrance, 2400);
-    const fallbackTimer = window.setTimeout(triggerEntrance, 3500);
+    const mainTimer = window.setTimeout(triggerEntrance, 1700);
+    const fallbackTimer = window.setTimeout(triggerEntrance, 2600);
 
     return () => {
       window.clearTimeout(mainTimer);
@@ -226,21 +226,21 @@ export default function App() {
               </div>
 
               <div className="about-stats" aria-label="Career highlights">
-                <div className="stat-card">
+                <div className="stat-card" data-reveal>
                   <div className="stat-icon"><i className="fa-solid fa-graduation-cap"></i></div>
                   <div>
                     <div className="stat-num">BS '26</div>
                     <div className="stat-desc">Bachelor of Science in Computer Engineering from University of Batangas</div>
                   </div>
                 </div>
-                <div className="stat-card">
+                <div className="stat-card" data-reveal>
                   <div className="stat-icon"><i className="fa-solid fa-certificate"></i></div>
                   <div>
                     <div className="stat-num">5+</div>
                     <div className="stat-desc">Industry certifications including CCNA and Cisco Networking credentials</div>
                   </div>
                 </div>
-                <div className="stat-card">
+                <div className="stat-card" data-reveal>
                   <div className="stat-icon"><i className="fa-solid fa-microchip"></i></div>
                   <div>
                     <div className="stat-num">IoT</div>
@@ -262,7 +262,7 @@ export default function App() {
 
             <div className="projects-grid">
 
-              <article className="project-card">
+              <article className="project-card" data-reveal>
                 <div className="project-top">
                   <div className="project-icon"><i className="fa-solid fa-water"></i></div>
                   <div className="project-links">
@@ -279,7 +279,7 @@ export default function App() {
                 </div>
               </article>
               
-              <article className="project-card">
+              <article className="project-card" data-reveal>
                 <div className="project-top">
                   <div className="project-icon"><i className="fa-solid fa-wrench"></i></div>
                 </div>
@@ -292,7 +292,7 @@ export default function App() {
                 </div>
               </article>
               
-              <article className="project-card">
+              <article className="project-card" data-reveal>
                 <div className="project-top">
                   <div className="project-icon"><i className="fa-solid fa-chart-line" /></div>
                   <div className="project-links">
@@ -310,7 +310,7 @@ export default function App() {
                 </div>
               </article>
 
-              <article className="project-card">
+              <article className="project-card" data-reveal>
                 <div className="project-top">
                   <div className="project-icon"><i className="fa-solid fa-terminal" /></div>
                   <div className="project-links">
@@ -330,7 +330,7 @@ export default function App() {
           </section>
 
           <section id="contact" aria-labelledby="contact-heading">
-            <div className="contact-card">
+            <div className="contact-card" data-reveal>
               <p className="section-eyebrow" style={{ justifyContent: 'center' }}>Get in touch</p>
               <h2 className="contact-heading" id="contact-heading">Let's build<br />something great.</h2>
               <p className="contact-sub">
