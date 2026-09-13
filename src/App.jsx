@@ -53,8 +53,8 @@ export default function App() {
 
     revealEls.forEach(el => observer.observe(el));
 
-    const mainTimer = window.setTimeout(triggerEntrance, 1700);
-    const fallbackTimer = window.setTimeout(triggerEntrance, 2600);
+    const mainTimer = window.setTimeout(triggerEntrance, 1900);
+    const fallbackTimer = window.setTimeout(triggerEntrance, 3200);
 
     return () => {
       window.clearTimeout(mainTimer);
