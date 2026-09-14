@@ -1,18 +1,40 @@
 
         :root {
-          --bg:         #f3f4f6;
+          --bg:         #ffffff;
           --bg-card:    #ffffff;
-          --bg-surface: #e5e7eb;
-          --text:       #111827;
-          --text-muted: #6b7280;
-          --accent:     #374151;
-          --accent-glow: rgba(17, 24, 39, 0.08);
-          --amber:      #4b5563;
-          --border:     rgba(17, 24, 39, 0.09);
+          --bg-surface: #f3f4f6;
+          --text:       #1f1f1f;
+          --text-muted: #666666;
+          --accent:     #2b2b2b;
+          --accent-glow: rgba(31, 31, 31, 0.08);
+          --header-bg:  rgba(255, 255, 255, 0.82);
+          --amber:      #4b4b4b;
+          --button-bg:  #2b2b2b;
+          --button-text: #ffffff;
+          --button-hover: #111111;
+          --toggle-border: rgba(31, 31, 31, 0.28);
+          --border:     rgba(31, 31, 31, 0.12);
           --max-w:      1200px;
           --nav-h:      72px;
           --radius:     14px;
           --ease:       cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        html.dark {
+          --bg:         #141414;
+          --bg-card:    #202020;
+          --bg-surface: #303030;
+          --text:       #f5f5f5;
+          --text-muted: #b7b7b7;
+          --accent:     #f0f0f0;
+          --accent-glow: rgba(245, 245, 245, 0.12);
+          --header-bg:  rgba(20, 20, 20, 0.92);
+          --amber:      #ffffff;
+          --button-bg:  #f5f5f5;
+          --button-text: #141414;
+          --button-hover: #ffffff;
+          --toggle-border: rgba(245, 245, 245, 0.5);
+          --border:     rgba(245, 245, 245, 0.16);
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -25,6 +47,22 @@
           font-size: 16px;
           line-height: 1.7;
           overflow-x: hidden;
+          transition: background-color 0.45s ease, color 0.45s ease;
+        }
+
+        header,
+        nav.nav-links,
+        .stat-card,
+        .project-card,
+        .contact-card,
+        .social-link,
+        .chip,
+        .title-chip,
+        .status-badge,
+        .theme-toggle {
+          transition-property: background-color, color, border-color, box-shadow;
+          transition-duration: 0.45s;
+          transition-timing-function: ease;
         }
 
         .page-wrapper {
@@ -121,7 +159,7 @@
           top: 0;
           z-index: 100;
           height: var(--nav-h);
-          background: rgba(255, 255, 255, 0.82);
+          background: var(--header-bg);
           backdrop-filter: blur(18px);
           -webkit-backdrop-filter: blur(18px);
           border-bottom: 1px solid var(--border);
@@ -144,6 +182,13 @@
           align-items: center;
           justify-content: space-between;
           gap: 1rem;
+        }
+
+        .header-actions {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          flex-shrink: 0;
         }
 
         .logo {
@@ -193,8 +238,8 @@
           align-items: center;
           gap: 0.4rem;
           padding: 0.5rem 1.25rem;
-          background: var(--accent);
-          color: #fff;
+          background: var(--button-bg);
+          color: var(--button-text);
           border: none;
           border-radius: 8px;
           font-size: 0.875rem;
@@ -208,7 +253,7 @@
         }
 
         .btn-contact:hover {
-          background: var(--amber);
+          background: var(--button-hover);
           transform: translateY(-1px);
           box-shadow: 0 6px 20px rgba(17, 24, 39, 0.12);
         }
@@ -341,7 +386,7 @@
           align-items: center;
           gap: 0.4rem;
           background: var(--bg-card);
-          border: 1px solid var(--border);
+          border: 1px solid var(--toggle-border);
           border-radius: 99px;
           padding: 0.3rem 0.75rem 0.3rem 0.5rem;
           font-size: 0.7rem;
@@ -450,8 +495,8 @@
         }
 
         .social-link:hover {
-          background: var(--accent);
-          color: #fff;
+          background: var(--button-bg);
+          color: var(--button-text);
           border-color: var(--accent);
           transform: translateY(-3px);
         }
@@ -869,8 +914,8 @@
           align-items: center;
           gap: 0.5rem;
           padding: 0.875rem 2rem;
-          background: var(--accent);
-          color: #fff;
+          background: var(--button-bg);
+          color: var(--button-text);
           border: none;
           border-radius: 10px;
           font-size: 1rem;
@@ -881,8 +926,60 @@
           font-family: inherit;
         }
 
+        .theme-toggle {
+          width: 58px;
+          height: 32px;
+          padding: 3px;
+          border: 1px solid var(--toggle-border);
+          border-radius: 999px;
+          background: var(--bg-surface);
+          color: var(--text-muted);
+          cursor: pointer;
+          flex-shrink: 0;
+        }
+
+        .theme-toggle-track {
+          display: block;
+          width: 100%;
+          height: 100%;
+          position: relative;
+        }
+
+        .theme-toggle-thumb {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background: var(--bg-card);
+          box-shadow: 0 2px 5px rgba(17, 24, 39, 0.2);
+          transition: transform 0.35s var(--ease), background-color 0.45s ease;
+        }
+
+        .theme-toggle.dark .theme-toggle-thumb {
+          transform: translateX(24px);
+        }
+
+        .theme-icon {
+          position: absolute;
+          top: 5px;
+          z-index: 1;
+          font-size: 0.75rem;
+          line-height: 1;
+          pointer-events: none;
+        }
+
+        .theme-icon-sun { left: 5px; }
+        .theme-icon-moon { right: 5px; }
+
+        .theme-toggle:focus-visible {
+          outline: 2px solid var(--accent);
+          outline-offset: 3px;
+        }
+
         .btn-primary:hover {
-          background: var(--amber);
+          background: var(--button-hover);
           transform: translateY(-2px);
           box-shadow: 0 10px 30px rgba(17, 24, 39, 0.12);
         }

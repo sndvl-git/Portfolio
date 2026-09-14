@@ -4,12 +4,17 @@ import profile from "./assets/muka.png";
 
 export default function App() {
   const [navOpen, setNavOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     address: '',
     message: '',
   });
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', isDarkMode);
+  }, [isDarkMode]);
 
   useEffect(() => {
     const preloader = document.getElementById('preloader');
@@ -126,17 +131,33 @@ export default function App() {
             <a href="#contact" onClick={closeNav}>Contact</a>
           </nav>
 
-          <button
-            type="button"
-            className="btn-contact"
-            onClick={() => {
-              closeNav();
-              openContactModal();
-            }}
-          >
-            <i className="fa-regular fa-paper-plane" aria-hidden="true" />
-            Contact Me
-          </button>
+          <div className="header-actions">
+            <button
+              type="button"
+              className={`theme-toggle${isDarkMode ? ' dark' : ''}`}
+              aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+              aria-pressed={isDarkMode}
+              onClick={() => setIsDarkMode((dark) => !dark)}
+            >
+              <span className="theme-toggle-track" aria-hidden="true">
+                <i className="fa-solid fa-sun theme-icon theme-icon-sun" />
+                <i className="fa-solid fa-moon theme-icon theme-icon-moon" />
+                <span className="theme-toggle-thumb" />
+              </span>
+            </button>
+
+            <button
+              type="button"
+              className="btn-contact"
+              onClick={() => {
+                closeNav();
+                openContactModal();
+              }}
+            >
+              <i className="fa-regular fa-paper-plane" aria-hidden="true" />
+              Contact Me
+            </button>
+          </div>
         </div>
       </header>
 
@@ -201,14 +222,10 @@ export default function App() {
                   Building<br />Smart Solutions.
                 </h2>
                 <p className="about-para">
-                  I am a <strong>Website Developer</strong>  from the Philippines and a recent graduate with a <strong>BS in Computer Engineering</strong>. 
-                  I build fast, accessible, and easy to use web applications that solve real problems for users. I write clean, maintainable code and I am eager to learn new tools and best practices to improve my work and grow my skills.
+                  I'm a recent <strong>Computer Engineering graduate</strong> from the Philippines who is <strong>passionate about technology</strong> and eager to begin my career. I'm interested in <strong>web development</strong> and enjoy working with computers, hardware, and electronics. I'm willing to <strong>learn, adapt, and take on new responsibilities</strong> while being someone the team can rely on.
                 </p>
                 <p className="about-para">
-                  I work well in teams, communicate clearly, and welcome feedback that helps me improve. I am determined to grow as a developer and help the company succeed while developing my hardware skills. <strong>I am eager to learn from colleagues and contribute to projects</strong> where I can gain hands-on experience.
-                </p>
-                <p className="about-para">
-                  In my free time I stay active, study open source projects, practice new skills, and tinker with PC hardware and electronics to strengthen both my software and hardware abilities.
+                  I <strong>welcome feedback</strong> because it helps me see things from different perspectives and improve. I’m eager to <strong>learn from others, contribute where I can, and gain hands-on experience</strong>. I see every challenge as an opportunity to <strong>grow and become better at what I do</strong>.
                 </p>
                 <p className="skills-label">Core toolkit</p>
                 <div className="skill-chips">
@@ -417,7 +434,7 @@ export default function App() {
             <a href="https://github.com/sndvl-git" target="_blank" rel="noopener noreferrer">GitHub</a>
             <a href="https://www.linkedin.com/in/lanz-sandoval-12b876416/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             <a href="https://ph.jobstreet.com/profile/me" target="_blank" rel="noopener noreferrer">Jobstreet</a>
-            <a href="mailto:lanzerrol.sandoval@gmail.com">Email</a>
+            <a href="https://profile.indeed.com/?hl=en_PH&co=PH&from=gnav-homepage--homepage-frontend" target="_blank" rel="noopener noreferrer">Indeed</a>
           </nav>
         </div>
       </footer>
