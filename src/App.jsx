@@ -1,12 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import './styles.css';
 import profile from "./assets/muka.png";
+import iot from "./assets/iot.png";
+import digi from "./assets/digi.png";
 
 export default function App() {
   const [navOpen, setNavOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isCvOpen, setIsCvOpen] = useState(false);
+  const [showcaseTab, setShowcaseTab] = useState('projects');
+  const [selectedCertification, setSelectedCertification] = useState(null);
+  const [certificationIndex, setCertificationIndex] = useState(0);
   const scrollFrameRef = useRef(null);
   const [formData, setFormData] = useState({
     name: '',
@@ -75,6 +80,7 @@ export default function App() {
       if (event.key === 'Escape') {
         setIsContactOpen(false);
         setIsCvOpen(false);
+        setSelectedCertification(null);
       }
     };
 
@@ -85,6 +91,16 @@ export default function App() {
   useEffect(() => () => {
     if (scrollFrameRef.current) cancelAnimationFrame(scrollFrameRef.current);
   }, []);
+
+  useEffect(() => {
+    if (showcaseTab !== 'certifications') return undefined;
+
+    const rotation = window.setTimeout(() => {
+      setCertificationIndex((current) => (current + 1) % 5);
+    }, 5000);
+
+    return () => window.clearTimeout(rotation);
+  }, [showcaseTab, certificationIndex]);
 
   const closeNav = () => setNavOpen(false);
   const handleNavClick = (event, target) => {
@@ -324,81 +340,142 @@ export default function App() {
           </section>
 
           <section id="projects" aria-labelledby="projects-heading">
-            <div className="section-header">
-              <div>
-                <p className="section-eyebrow">Featured Work</p>
-                <h2 className="section-heading" id="projects-heading">Recent Projects</h2>
+            <div className="showcase-heading">
+              <h2 className="section-heading" id="projects-heading">Portfolio Showcase</h2>
+              <nav className="showcase-tabs" aria-label="Portfolio categories">
+                {['projects', 'certifications', 'techstack'].map((tab) => (
+                  <button
+                    key={tab}
+                    type="button"
+                    className={showcaseTab === tab ? 'active' : ''}
+                    aria-pressed={showcaseTab === tab}
+                    onClick={() => setShowcaseTab(tab)}
+                  >
+                    {tab === 'techstack' ? 'Techstack' : tab[0].toUpperCase() + tab.slice(1)}
+                  </button>
+                ))}
+              </nav>
+            </div>
+
+            {showcaseTab === 'projects' && (
+              <div className="showcase-projects" key="projects-view">
+                <article className="showcase-project-card">
+                  <img src={iot} alt="Smart Pipeline preview" />
+                  <div className="showcase-project-copy">
+                    <span className="showcase-index">01 / IoT</span>
+                    <h3>Smart Pipeline</h3>
+                    <p>Real-time leak detection for water pipelines using flow sensors, microcontroller processing, and GSM alerts.</p>
+                    <a href="https://water-monitoring-dashboard-six.vercel.app/" target="_blank" rel="noopener noreferrer">Details <i className="fa-solid fa-arrow-up-right-from-square" /></a>
+                  </div>
+                </article>
+                <article className="showcase-project-card">
+                  <img src={digi} alt="Digiscribe preview" />
+                  <div className="showcase-project-copy">
+                    <span className="showcase-index">02 / Web</span>
+                    <h3>Digiscribe</h3>
+                    <p>A responsive website for Digiscribe Transcription Corp. with a clear, modern, and user-friendly interface.</p>
+                    <a href="https://www.digiscribeasiapacific.com/" target="_blank" rel="noopener noreferrer">Details <i className="fa-solid fa-arrow-up-right-from-square" /></a>
+                  </div>
+                </article>
+                <article className="showcase-project-card">
+                  <img src={profile} alt="Vicmar Homes preview" />
+                  <div className="showcase-project-copy">
+                    <span className="showcase-index">03 / Web</span>
+                    <h3>Vicmar Homes</h3>
+                    <p>Website improvements, property listing fixes, and a direct contact feature for unit availability.</p>
+                    <a href="http://vicmarhomes.com/" target="_blank" rel="noopener noreferrer">Details <i className="fa-solid fa-arrow-up-right-from-square" /></a>
+                  </div>
+                </article>
               </div>
-              <a href="#projects" className="view-all" onClick={(event) => handleNavClick(event, '#projects')}>View all <i className="fa-solid fa-arrow-right" /></a>
-            </div>
+            )}
 
-            <div className="projects-grid">
+            {showcaseTab === 'certifications' && (
+              <div className="certification-showcase">
+                <div className="certification-carousel">
+                <button type="button" className="certification-arrow certification-arrow-prev" aria-label="Previous certification" onClick={() => setCertificationIndex((current) => (current + 4) % 5)}>
+                  <i className="fa-solid fa-arrow-left" aria-hidden="true" />
+                </button>
+                {['CCNA: Introduction to Networks', 'Cisco Networking Basics', 'Python Programming', 'C Programming', 'JavaScript Essentials'].map((certification, index) => {
+                  const offset = (index - certificationIndex + 5) % 5;
+                  const position = offset === 0
+                    ? 'active'
+                    : offset === 4
+                      ? 'previous'
+                      : offset === 1
+                        ? 'next'
+                        : 'hidden';
 
-              <article className="project-card" data-reveal>
-                <div className="project-top">
-                  <div className="project-icon"><i className="fa-solid fa-water"></i></div>
-                  <div className="project-links">
-                    <a href="https://water-monitoring-dashboard-six.vercel.app/" aria-label="Live demo"><i className="fa-solid fa-arrow-up-right-from-square"></i></a>
-                  </div>
+                  return (
+                    <button
+                      className={`certification-card ${position}`}
+                      type="button"
+                      key={certification}
+                      onClick={() => setSelectedCertification(certification)}
+                      aria-label={`Preview ${certification}`}
+                    >
+                      <img src={profile} alt={`${certification} certificate preview`} />
+                      <h3>{certification}</h3>
+                    </button>
+                  );
+                })}
+                <button type="button" className="certification-arrow certification-arrow-next" aria-label="Next certification" onClick={() => setCertificationIndex((current) => (current + 1) % 5)}>
+                  <i className="fa-solid fa-arrow-right" aria-hidden="true" />
+                </button>
                 </div>
-                <h3 className="project-name">Smart Pipeline Monitor</h3>
-                <p className="project-desc">IoT-based real-time leak detection system for water pipelines using flow sensors, microcontroller processing, and GSM-based SMS alerts.</p>
-                <div className="project-tags">
-                  <span className="tag">ESP32</span>
-                  <span className="tag">IoT</span>
-                  <span className="tag">Sensors</span>
-                  <span className="tag">GSM</span>
+                <div className="certification-dots" aria-label="Certification carousel position">
+                  {[0, 1, 2, 3, 4].map((index) => (
+                    <button
+                      key={index}
+                      type="button"
+                      className={certificationIndex === index ? 'active' : ''}
+                      aria-label={`Show certification ${index + 1}`}
+                      onClick={() => setCertificationIndex(index)}
+                    />
+                  ))}
                 </div>
-              </article>
-              
-              <article className="project-card" data-reveal>
-                <div className="project-top">
-                  <div className="project-icon"><i className="fa-solid fa-wrench"></i></div>
-                </div>
-                <h3 className="project-name">Hardware Troubleshooting</h3>
-                <p className="project-desc">Hands-on experience with computer repair, diagnostics, and network infrastructure — PC maintenance, laptop troubleshooting, and ethernet setup.</p>
-                <div className="project-tags">
-                  <span className="tag">PC Repair</span>
-                  <span className="tag">Networking</span>
-                  <span className="tag">Hardware</span>
-                </div>
-              </article>
-              
-              <article className="project-card" data-reveal>
-                <div className="project-top">
-                  <div className="project-icon"><i className="fa-solid fa-chart-line" /></div>
-                  <div className="project-links">
-                    <a href="#" aria-label="GitHub repo"><i className="fa-brands fa-github" /></a>
-                    <a href="http://vicmarhomes.com/" aria-label="Live demo"><i className="fa-solid fa-arrow-up-right-from-square" /></a>
-                  </div>
-                </div>
-                <h3 className="project-name">Vicmar Homes</h3>
-                <p className="project-desc">Fixed and debugged property listings on the website, added a contact feature to reach the CEO directly for unit availability, and implemented several UI tweaks.</p>
-                <div className="project-tags">
-                  <span className="tag">HTML</span>
-                  <span className="tag">CSS</span>
-                  <span className="tag">JavaScript</span>
-                  <span className="tag">React</span>
-                </div>
-              </article>
+              </div>
+            )}
 
-              <article className="project-card" data-reveal>
-                <div className="project-top">
-                  <div className="project-icon"><i className="fa-solid fa-terminal" /></div>
-                  <div className="project-links">
-                    <a href="#" aria-label="GitHub repo"><i className="fa-brands fa-github" /></a>
-                    <a href="https://www.digiscribeasiapacific.com/" aria-label="Live demo"><i className="fa-solid fa-arrow-up-right-from-square" /></a>
-                  </div>
-                </div>
-                <h3 className="project-name">Digiscribe</h3>
-                <p className="project-desc">Developed a responsive website for Digiscribe Transcription Corp., implementing modern web design practices and user-friendly interfaces.</p>
-                <div className="project-tags">
-                  <span className="tag">HTML</span>
-                  <span className="tag">CSS</span>
-                  <span className="tag">React</span>
-                </div>
-              </article>
-            </div>
+{showcaseTab === 'techstack' && (
+  <div className="techstack-panel">
+    <div className="tech-category" style={{ '--i': 0 }}>
+      <p className="tech-category-title">Frontend</p>
+      <ul className="tech-list">
+        <li>HTML</li><li>CSS</li><li>JavaScript (JS)</li><li>JSX</li><li>React</li><li>Vite</li>
+      </ul>
+    </div>
+    <div className="tech-category" style={{ '--i': 1 }}>
+      <p className="tech-category-title">Backend</p>
+      <ul className="tech-list">
+        <li>Python</li><li>Java</li><li>Node.js</li><li>REST APIs</li><li>SQL</li>
+      </ul>
+    </div>
+    <div className="tech-category" style={{ '--i': 2 }}>
+      <p className="tech-category-title">Development Tools</p>
+      <ul className="tech-list">
+        <li>Git</li><li>GitHub</li><li>VS Code</li><li>Claude Code</li><li>OpenAI Codex</li>
+      </ul>
+    </div>
+    <div className="tech-category" style={{ '--i': 3 }}>
+      <p className="tech-category-title">Networking / Other Technical</p>
+      <ul className="tech-list">
+        <li>Cisco / Cisco Packet Tracer</li>
+      </ul>
+    </div>
+    <div className="tech-category" style={{ '--i': 4 }}>
+      <p className="tech-category-title">Productivity</p>
+      <ul className="tech-list">
+        <li>Microsoft Word</li><li>Microsoft Excel</li>
+      </ul>
+    </div>
+    <div className="tech-category" style={{ '--i': 5 }}>
+      <p className="tech-category-title">AI Tools</p>
+      <ul className="tech-list">
+        <li>ChatGPT / GPT</li><li>Claude Code</li><li>OpenAI Codex</li>
+      </ul>
+    </div>
+  </div>
+)}
           </section>
 
           <section id="contact" aria-labelledby="contact-heading">
@@ -502,6 +579,24 @@ export default function App() {
               <i className="fa-solid fa-download" aria-hidden="true" />
               Download CV
             </a>
+          </div>
+        </div>
+      )}
+
+      {selectedCertification && (
+        <div className="certificate-modal-backdrop" role="presentation" onClick={() => setSelectedCertification(null)}>
+          <div
+            className="certificate-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${selectedCertification} preview`}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button type="button" className="modal-close" onClick={() => setSelectedCertification(null)} aria-label="Close certificate preview">
+              <i className="fa-solid fa-xmark" aria-hidden="true" />
+            </button>
+            <img src={profile} alt={`${selectedCertification} enlarged preview`} />
+            <h3>{selectedCertification}</h3>
           </div>
         </div>
       )}
