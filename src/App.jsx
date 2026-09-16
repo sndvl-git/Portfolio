@@ -3,6 +3,7 @@ import './styles.css';
 import profile from "./assets/muka.png";
 import iot from "./assets/iot.png";
 import digi from "./assets/digi.png";
+import vicmar from "./assets/vicmar.png";
 
 export default function App() {
   const [navOpen, setNavOpen] = useState(false);
@@ -378,7 +379,7 @@ export default function App() {
                   </div>
                 </article>
                 <article className="showcase-project-card">
-                  <img src={profile} alt="Vicmar Homes preview" />
+                  <img src={vicmar} alt="Vicmar Homes preview" />
                   <div className="showcase-project-copy">
                     <span className="showcase-index">03 / Web</span>
                     <h3>Vicmar Homes</h3>
