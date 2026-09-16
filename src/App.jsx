@@ -6,6 +6,7 @@ export default function App() {
   const [navOpen, setNavOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [isCvOpen, setIsCvOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     address: '',
@@ -21,7 +22,7 @@ export default function App() {
     const header = document.getElementById('site-header');
     const heroPhoto = document.getElementById('hero-photo');
     const heroName = document.querySelector('.hero-name');
-    const heroLocation = document.querySelector('.hero-location');
+    const heroLocation = document.querySelector('.hero-role');
     const heroTitle = document.querySelector('.hero-title');
     const heroSocial = document.querySelector('.hero-social');
 
@@ -72,6 +73,7 @@ export default function App() {
     const handleEscape = (event) => {
       if (event.key === 'Escape') {
         setIsContactOpen(false);
+        setIsCvOpen(false);
       }
     };
 
@@ -82,6 +84,7 @@ export default function App() {
   const closeNav = () => setNavOpen(false);
   const openContactModal = () => setIsContactOpen(true);
   const closeContactModal = () => setIsContactOpen(false);
+  const closeCvModal = () => setIsCvOpen(false);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -161,87 +164,69 @@ export default function App() {
         </div>
       </header>
 
+      <section id="hero" aria-labelledby="hero-name">
+        <div className="hero-grid-lines" aria-hidden="true" />
+        <div className="hero-inner">
+          <div className="hero-copy">
+            <h1 className="hero-name" id="hero-name">
+              Lanz <span className="accent-word">Sandoval</span>
+            </h1>
+
+            <p className="hero-role">Computer Engineer <span>·</span> 2026</p>
+
+            <p className="hero-title">
+              Building smart solutions for the physical and digital world, with curiosity, care, and a focus on making technology genuinely useful for people.
+            </p>
+
+            <div className="hero-actions">
+              <a className="btn-primary" href="#projects">
+                Explore Projects
+                <i className="fa-solid fa-arrow-right" aria-hidden="true" />
+              </a>
+              <button type="button" className="btn-outline" onClick={() => setIsCvOpen(true)}>
+                Download CV
+                <i className="fa-solid fa-download" aria-hidden="true" />
+              </button>
+            </div>
+          </div>
+
+          <div
+            className="hero-photo-wrap"
+            id="hero-photo"
+          >
+            <div className="hero-photo-ring">
+              <img
+                src={profile}
+                alt="Lanz Sandoval — profile photo"
+                width="240"
+                height="240"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="hero-social" aria-label="Social links">
+          <a href="https://github.com/sndvl-git" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <i className="fa-brands fa-github" />
+          </a>
+          <a href="https://www.linkedin.com/in/lanz-sandoval-12b876416/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <i className="fa-brands fa-linkedin-in" />
+          </a>
+          <a href="https://www.facebook.com/Z.Sndvl" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <i className="fa-brands fa-facebook" />
+          </a>
+          <a href="mailto:lanzerrol.sandoval@gmail.com" aria-label="Email">
+            <i className="fa-regular fa-envelope" />
+          </a>
+        </div>
+      </section>
+
       <main>
         <div className="page-wrapper">
-          <section id="hero" aria-labelledby="hero-name">
-            <div className="hero-inner">
-              <div className="hero-photo-wrap" id="hero-photo" aria-hidden="true">
-                <div className="hero-photo-ring">
-                  <img
-                    src={profile}
-                    alt="Lanz Sandoval — profile photo"
-                    width="240"
-                    height="240"
-                  />
-                </div>
-                <div className="status-badge">
-                  <span className="status-dot" />
-                  Open to work
-                </div>
-              </div>
-
-              <div className="hero-text">
-                <h1 className="hero-name" id="hero-name">
-                  Lanz<br />
-                  <span className="accent-word">Sandoval</span>
-                </h1>
-
-                <p className="hero-location">
-                  <i className="fa-solid fa-location-dot" aria-hidden="true" />
-                 Bauan, Batangas, Philippines &nbsp;·&nbsp; UTC−8
-                </p>
-
-                <div className="hero-title">
-                  Computer Engineer
-                  <span className="title-chip">Fresh Graduate</span>
-                </div>
-
-                <div className="hero-social" aria-label="Social links">
-                  <a href="https://github.com/sndvl-git" className="social-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                    <i className="fa-brands fa-github" />
-                  </a>
-                  <a href="https://www.linkedin.com/in/lanz-sandoval-12b876416/" className="social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                    <i className="fa-brands fa-linkedin-in" />
-                  </a>
-                  <a href="https://www.facebook.com/Z.Sndvl" className="social-link" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                    <i className="fa-brands fa-facebook" />
-                  </a>
-                  <a href="mailto:lanzerrol.sandoval@gmail.com" className="social-link" aria-label="Email">
-                    <i className="fa-regular fa-envelope" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </section>
-
           <section id="about" aria-labelledby="about-heading">
-            <div className="about-grid">
-              <div>
-                <p className="section-eyebrow">About Me</p>
-                <h2 className="about-heading" id="about-heading">
-                  Building<br />Smart Solutions.
-                </h2>
-                <p className="about-para">
-                  I'm a recent <strong>Computer Engineering graduate</strong> from the Philippines who is <strong>passionate about technology</strong> and eager to begin my career. I'm interested in <strong>web development</strong> and enjoy working with computers, hardware, and electronics. I'm willing to <strong>learn, adapt, and take on new responsibilities</strong> while being someone the team can rely on.
-                </p>
-                <p className="about-para">
-                  I <strong>welcome feedback</strong> because it helps me see things from different perspectives and improve. I’m eager to <strong>learn from others, contribute where I can, and gain hands-on experience</strong>. I see every challenge as an opportunity to <strong>grow and become better at what I do</strong>.
-                </p>
-                <p className="skills-label">Core toolkit</p>
-                <div className="skill-chips">
-                  <span className="chip">Microcontrollers</span>
-                  <span className="chip">JavaScript</span>
-                  <span className="chip">Node.js</span>                
-                  <span className="chip">React</span>
-                  <span className="chip">C++</span>
-                  <span className="chip">C#</span>
-                  <span className="chip">Git</span>
-                  <span className="chip">HTML/CSS</span>
-                  <span className="chip">Python</span>
-                  <span className="chip">CISCO Networking</span>
-                </div>
-              </div>
+            <h2 className="about-heading" id="about-heading">About Me</h2>
 
+            <div className="about-grid">
               <div className="about-stats" aria-label="Career highlights">
                 <div className="stat-card" data-reveal>
                   <div className="stat-icon"><i className="fa-solid fa-graduation-cap"></i></div>
@@ -263,6 +248,32 @@ export default function App() {
                     <div className="stat-num">IoT</div>
                     <div className="stat-desc">Hands-on experience with ESP32, sensors, and embedded systems design</div>
                   </div>
+                </div>
+              </div>
+
+              <div className="about-column about-intro">
+                <p className="about-column-label">Who am I</p>
+                <p className="about-para">
+                  I'm a <strong>Computer Engineering graduate</strong> from the Philippines, curious about how things work and excited to build technology that feels useful, thoughtful, and easy for people to live with. I enjoy moving between web development, hardware, and electronics while learning something new with every project.
+                </p>
+              </div>
+
+              <div className="about-column about-values">
+                <p className="about-column-label">My values</p>
+                <p className="about-para">
+                  I <strong>welcome feedback</strong> because it helps me see things from different perspectives and improve. I want to learn from others, contribute where I can, and become someone a team can rely on when a challenge needs patience, care, and a practical solution.
+                </p>
+              </div>
+
+              <div className="personal-details">
+                <p className="about-column-label">Personal details</p>
+                <div className="personal-details-grid">
+                  <div><span>Full name</span><strong>Lanz Errol P. Sandoval</strong></div>
+                  <div><span>Location</span><strong>Bauan, Batangas, Philippines</strong></div>
+                  <div><span>Phone</span><strong>+63 917 123 4567</strong></div>
+                  <div><span>Email</span><strong>lanzerrol.sandoval@gmail.com</strong></div>
+                  <div><span>Education</span><strong>University of Batangas</strong></div>
+                  <div><span>Age</span><strong>23</strong></div>
                 </div>
               </div>
             </div>
@@ -423,6 +434,30 @@ export default function App() {
                 Get in Touch
               </button>
             </form>
+          </div>
+        </div>
+      )}
+
+      {isCvOpen && (
+        <div className="cv-modal-backdrop" role="presentation" onClick={closeCvModal}>
+          <div
+            className="cv-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-label="CV Preview"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button type="button" className="modal-close" onClick={closeCvModal} aria-label="Close CV preview">
+              <i className="fa-solid fa-xmark" aria-hidden="true" />
+            </button>
+            <span className="cv-modal-label">CV Preview</span>
+            <div className="cv-preview">
+              <img src={profile} alt="Lanz Sandoval CV preview" />
+            </div>
+            <a className="btn-primary cv-download" href="/Lanz-Sandoval-CV.pdf" download>
+              <i className="fa-solid fa-download" aria-hidden="true" />
+              Download CV
+            </a>
           </div>
         </div>
       )}
