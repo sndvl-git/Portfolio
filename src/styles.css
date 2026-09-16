@@ -14,6 +14,7 @@
           --button-hover: #111111;
           --toggle-border: rgba(31, 31, 31, 0.28);
           --border:     rgba(31, 31, 31, 0.12);
+          --grid-line:  rgba(31, 31, 31, 0.12);
           --max-w:      1200px;
           --nav-h:      72px;
           --radius:     14px;
@@ -35,10 +36,16 @@
           --button-hover: #ffffff;
           --toggle-border: rgba(245, 245, 245, 0.5);
           --border:     rgba(245, 245, 245, 0.16);
+          --grid-line:  rgba(245, 245, 245, 0.08);
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
+        html { scroll-padding-top: 5rem; }
+
+        #hero,
+        #about,
+        #projects,
+        #contact { scroll-margin-top: 5rem; }
 
         body {
           background: var(--bg);
@@ -155,26 +162,31 @@
         .projects-grid [data-reveal]:nth-child(4) { transition-delay: 0.3s; }
 
         header {
-          position: sticky;
-          top: 0;
+          position: fixed;
+          top: 1rem;
+          left: 50%;
+          width: min(calc(100% - 2rem), 1120px);
           z-index: 100;
           height: var(--nav-h);
           background: var(--header-bg);
           backdrop-filter: blur(18px);
           -webkit-backdrop-filter: blur(18px);
-          border-bottom: 1px solid var(--border);
+          border: 1px solid var(--border);
+          border-radius: 999px;
+          box-shadow: 0 12px 35px rgba(17, 24, 39, 0.1);
           opacity: 0;
-          transform: translateY(-8px);
+          transform: translate(-50%, -8px);
           transition: opacity 1.2s var(--ease), transform 1.2s var(--ease), background 0.3s ease;
         }
 
         header.visible {
           opacity: 1;
-          transform: translateY(0);
+          transform: translate(-50%, 0);
         }
 
         .header-inner {
-          max-width: var(--max-w);
+          position: relative;
+          width: 100%;
           margin: 0 auto;
           padding: 0 clamp(1.25rem, 4vw, 3rem);
           height: 100%;
@@ -209,6 +221,12 @@
           gap: clamp(1rem, 3vw, 2.25rem);
         }
 
+        nav.nav-links {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
         nav a {
           font-size: 0.875rem;
           font-weight: 500;
@@ -236,8 +254,11 @@
         .btn-contact {
           display: inline-flex;
           align-items: center;
-          gap: 0.4rem;
-          padding: 0.5rem 1.25rem;
+          justify-content: center;
+          gap: 0.45rem;
+          width: 42px;
+          height: 42px;
+          padding: 0;
           background: var(--button-bg);
           color: var(--button-text);
           border: none;
@@ -246,10 +267,30 @@
           font-weight: 600;
           text-decoration: none;
           letter-spacing: 0.01em;
-          transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+          transition: width 0.65s var(--ease), background 0.55s ease, color 0.55s ease, transform 0.55s var(--ease), box-shadow 0.55s ease;
           flex-shrink: 0;
           cursor: pointer;
           font-family: inherit;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+
+        .contact-label {
+          max-width: 0;
+          opacity: 0;
+          overflow: hidden;
+          transition: max-width 0.65s var(--ease), opacity 0.45s ease;
+        }
+
+        .btn-contact:hover,
+        .btn-contact:focus-visible {
+          width: 132px;
+        }
+
+        .btn-contact:hover .contact-label,
+        .btn-contact:focus-visible .contact-label {
+          max-width: 82px;
+          opacity: 1;
         }
 
         .btn-contact:hover {
@@ -287,7 +328,19 @@
 
           nav.nav-links.open { display: flex; }
 
-          .btn-contact { font-size: 0.8125rem; padding: 0.45rem 1rem; }
+          nav.nav-links {
+            left: 0;
+            right: 0;
+            transform: none;
+          }
+
+          .btn-contact { width: 38px; height: 38px; }
+
+          .btn-contact:hover,
+          .btn-contact:focus-visible { width: 38px; }
+
+          .btn-contact:hover .contact-label,
+          .btn-contact:focus-visible .contact-label { max-width: 0; opacity: 0; }
         }
 
         main { padding-top: 0; }
@@ -315,7 +368,7 @@
         }
 
         #hero {
-          min-height: calc(100svh - var(--nav-h));
+          min-height: 100svh;
           display: flex;
           align-items: center;
           padding: 0 clamp(1rem, 3vw, 2.5rem);
@@ -329,13 +382,25 @@
         .hero-grid-lines {
           position: absolute;
           inset: 0;
-          opacity: 0.45;
-          background-image: linear-gradient(to right, var(--border) 1px, transparent 1px), linear-gradient(to bottom, var(--border) 1px, transparent 1px);
-          background-color: var(--bg);
-          background-size: 12rem 12rem;
+          opacity: 0.9;
+          background-image: linear-gradient(to right, var(--grid-line) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+          background-color: transparent;
+          background-size: 8rem 8rem;
           mask-image: linear-gradient(to right, black, transparent 75%);
           z-index: -1;
-          transition: background-color 0.45s ease;
+          transition: opacity 0.45s ease;
+        }
+
+        .hero-stage {
+          position: relative;
+          z-index: 1;
+          width: calc(100% - clamp(2rem, 8vw, 8rem));
+          height: 100svh;
+          min-height: 100svh;
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+          padding-bottom: 4rem;
         }
 
         .hero-inner {
@@ -429,11 +494,12 @@
 
         .hero-name {
           font-family: 'Syne', sans-serif;
-          font-size: clamp(2.75rem, 5.5vw, 5.75rem);
+          font-size: clamp(2.2rem, 5vw, 5.25rem);
           font-weight: 800;
           letter-spacing: -0.03em;
           line-height: 1.05;
           white-space: nowrap;
+          max-width: 100%;
           color: var(--text);
           margin-bottom: 1rem;
           opacity: 0;
@@ -442,7 +508,26 @@
         }
 
         .hero-name.visible { opacity: 1; transform: translateY(0); }
-        .hero-name .accent-word { color: var(--accent); }
+
+        .typing-greeting,
+        .typing-name {
+          display: inline-block;
+          vertical-align: bottom;
+          white-space: nowrap;
+          clip-path: inset(0 100% 0 0);
+        }
+
+        .typing-name { margin-left: 0.18em; }
+
+        .hero-name.visible .typing-greeting {
+          animation: type-reveal 0.7s var(--ease) 0.2s forwards;
+        }
+
+        .hero-name.visible .typing-name {
+          animation: type-reveal 1s var(--ease) 0.95s forwards;
+        }
+
+        @keyframes type-reveal { to { clip-path: inset(0 0 0 0); } }
 
         .hero-role {
           display: flex;
@@ -496,13 +581,25 @@
 
         .btn-outline:hover { background: #f0f0f0; border-color: #111111; transform: translateY(-2px); }
 
+        html.dark .btn-outline {
+          background: #0b0b0b;
+          border-color: #ffffff;
+          color: #ffffff;
+        }
+
+        html.dark .btn-outline:hover {
+          background: #1c1c1c;
+          border-color: #ffffff;
+        }
+
         .hero-social {
           position: absolute;
-          bottom: 1.5rem;
-          left: clamp(1rem, 3vw, 2.5rem);
+          bottom: 0;
+          left: 0;
           display: flex;
           align-items: center;
           gap: 0.65rem;
+          padding: clamp(4rem, 12vh, 7rem) 0.75rem clamp(1.5rem, 4vh, 3rem);
           z-index: 2;
         }
 
@@ -558,6 +655,8 @@
             text-align: left;
             gap: 2rem;
           }
+
+          .hero-stage { padding-bottom: 5rem; }
 
           #hero { align-items: flex-start; }
           .hero-copy { width: 100%; }
@@ -615,6 +714,21 @@
 
         .about-column { border-top: 1px solid var(--border); padding-top: 1.25rem; }
 
+        .about-column,
+        .personal-details {
+          opacity: 0;
+          transform: translateY(-22px);
+          transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+        }
+
+        .about-column.visible,
+        .personal-details.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .personal-details { transition-delay: 0.28s; }
+
         .about-para {
           font-size: 1rem;
           color: var(--text-muted);
@@ -661,6 +775,20 @@
         }
 
         .about-stats .stat-card {
+          opacity: 0;
+          transform: translateX(-28px);
+          transition: opacity 0.7s var(--ease), transform 0.7s var(--ease), border-color 0.2s ease, background-color 0.45s ease;
+        }
+
+        .about-stats .stat-card.visible {
+          opacity: 1;
+          transform: translateX(0);
+        }
+
+        .about-stats .stat-card:nth-child(2) { transition-delay: 0.14s; }
+        .about-stats .stat-card:nth-child(3) { transition-delay: 0.28s; }
+
+        .about-stats .stat-card {
           background: transparent;
           border-color: var(--border);
         }
@@ -669,6 +797,12 @@
         .about-stats .stat-num { color: var(--text); }
         .about-stats .stat-desc { color: var(--text-muted); }
         .about-stats .stat-icon { color: #ffffff; background: #0b0b0b; border-color: #0b0b0b; }
+
+        html.dark .about-stats .stat-icon {
+          color: #141414;
+          background: #ffffff;
+          border-color: #ffffff;
+        }
 
         .personal-details {
           grid-column: 2 / 4;
@@ -833,7 +967,7 @@
           height: 42px;
           border-radius: 10px;
           background: var(--accent-glow);
-          border: 1px solid rgba(99,102,241,0.3);
+          border: 1px solid var(--border);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -880,8 +1014,8 @@
           text-transform: uppercase;
           padding: 0.2rem 0.6rem;
           border-radius: 4px;
-          background: rgba(99,102,241,0.12);
-          color: var(--accent);
+          background: var(--bg-surface);
+          color: var(--text-muted);
         }
 
         #contact {
@@ -910,7 +1044,7 @@
           transform: translateX(-50%);
           width: 500px;
           height: 500px;
-          background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%);
+          background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
           pointer-events: none;
         }
 

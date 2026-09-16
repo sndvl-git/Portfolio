@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './styles.css';
 import profile from "./assets/muka.png";
 
@@ -7,6 +7,7 @@ export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isCvOpen, setIsCvOpen] = useState(false);
+  const scrollFrameRef = useRef(null);
   const [formData, setFormData] = useState({
     name: '',
     address: '',
@@ -47,7 +48,7 @@ export default function App() {
       if (heroSocial) setTimeout(() => heroSocial.classList.add('visible'), 880);
     };
 
-    const revealEls = document.querySelectorAll('#about, #projects, #contact, [data-reveal]');
+    const revealEls = document.querySelectorAll('#about, #projects, #contact, .about-column, .personal-details, [data-reveal]');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -81,7 +82,51 @@ export default function App() {
     return () => window.removeEventListener('keydown', handleEscape);
   }, []);
 
+  useEffect(() => () => {
+    if (scrollFrameRef.current) cancelAnimationFrame(scrollFrameRef.current);
+  }, []);
+
   const closeNav = () => setNavOpen(false);
+  const handleNavClick = (event, target) => {
+    event.preventDefault();
+    closeNav();
+    const destination = document.querySelector(target);
+
+    if (!destination) return;
+
+    destination.classList.add('visible');
+
+    if (scrollFrameRef.current) cancelAnimationFrame(scrollFrameRef.current);
+
+    const startPosition = window.scrollY;
+    const headerOffset = target === '#hero' || target === '#about' ? 0 : 80;
+    const destinationPosition = Math.max(
+      0,
+      destination.offsetTop - headerOffset
+    );
+    const distance = destinationPosition - startPosition;
+    const duration = 850;
+    const startTime = performance.now();
+    const easeInOutCubic = (progress) => (
+      progress < 0.5
+        ? 4 * progress ** 3
+        : 1 - ((-2 * progress + 2) ** 3) / 2
+    );
+
+    const animateScroll = (currentTime) => {
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      window.scrollTo(0, startPosition + distance * easeInOutCubic(progress));
+
+      if (progress < 1) {
+        scrollFrameRef.current = requestAnimationFrame(animateScroll);
+      } else {
+        scrollFrameRef.current = null;
+      }
+    };
+
+    scrollFrameRef.current = requestAnimationFrame(animateScroll);
+    window.history.replaceState(null, '', target);
+  };
   const openContactModal = () => setIsContactOpen(true);
   const closeContactModal = () => setIsContactOpen(false);
   const closeCvModal = () => setIsCvOpen(false);
@@ -116,7 +161,7 @@ export default function App() {
       <header id="site-header">
         
         <div className="header-inner">
-          <a href="#hero" className="logo">LS<span>.</span></a>
+          <a href="#hero" className="logo" onClick={(event) => handleNavClick(event, '#hero')}>LS<span>.</span></a>
           <button
             className="nav-toggle"
             aria-label="Toggle navigation"
@@ -128,10 +173,9 @@ export default function App() {
           </button>
 
           <nav className={`nav-links${navOpen ? ' open' : ''}`} id="nav-links">
-            <a href="#hero" onClick={closeNav}>Home</a>
-            <a href="#about" onClick={closeNav}>About</a>
-            <a href="#projects" onClick={closeNav}>Projects</a>
-            <a href="#contact" onClick={closeNav}>Contact</a>
+            <a href="#hero" onClick={(event) => handleNavClick(event, '#hero')}>Home</a>
+            <a href="#about" onClick={(event) => handleNavClick(event, '#about')}>About</a>
+            <a href="#projects" onClick={(event) => handleNavClick(event, '#projects')}>Projects</a>
           </nav>
 
           <div className="header-actions">
@@ -158,7 +202,7 @@ export default function App() {
               }}
             >
               <i className="fa-regular fa-paper-plane" aria-hidden="true" />
-              Contact Me
+              <span className="contact-label">Contact Me</span>
             </button>
           </div>
         </div>
@@ -166,58 +210,58 @@ export default function App() {
 
       <section id="hero" aria-labelledby="hero-name">
         <div className="hero-grid-lines" aria-hidden="true" />
-        <div className="hero-inner">
-          <div className="hero-copy">
-            <h1 className="hero-name" id="hero-name">
-              Lanz <span className="accent-word">Sandoval</span>
-            </h1>
+        <div className="hero-stage">
+          <div className="hero-inner">
+            <div className="hero-copy">
+              <h1 className="hero-name" id="hero-name">
+                <span className="typing-greeting">Hi,</span>
+                <span className="typing-name">I'm Lanz</span>
+              </h1>
 
-            <p className="hero-role">Computer Engineer <span>·</span> 2026</p>
+              <p className="hero-role">Computer Engineer <span>·</span> 2026</p>
 
-            <p className="hero-title">
-              Building smart solutions for the physical and digital world, with curiosity, care, and a focus on making technology genuinely useful for people.
-            </p>
+              <p className="hero-title">
+                Building smart solutions for the physical and digital world, with curiosity, care, and a focus on making technology genuinely useful for people.
+              </p>
 
-            <div className="hero-actions">
-              <a className="btn-primary" href="#projects">
-                Explore Projects
-                <i className="fa-solid fa-arrow-right" aria-hidden="true" />
-              </a>
-              <button type="button" className="btn-outline" onClick={() => setIsCvOpen(true)}>
-                Download CV
-                <i className="fa-solid fa-download" aria-hidden="true" />
-              </button>
+              <div className="hero-actions">
+                <a className="btn-primary" href="#projects" onClick={(event) => handleNavClick(event, '#projects')}>
+                  Explore Projects
+                  <i className="fa-solid fa-arrow-right" aria-hidden="true" />
+                </a>
+                <button type="button" className="btn-outline" onClick={() => setIsCvOpen(true)}>
+                  Download CV
+                  <i className="fa-solid fa-download" aria-hidden="true" />
+                </button>
+              </div>
+            </div>
+
+            <div className="hero-photo-wrap" id="hero-photo">
+              <div className="hero-photo-ring">
+                <img
+                  src={profile}
+                  alt="Lanz Sandoval — profile photo"
+                  width="240"
+                  height="240"
+                />
+              </div>
             </div>
           </div>
 
-          <div
-            className="hero-photo-wrap"
-            id="hero-photo"
-          >
-            <div className="hero-photo-ring">
-              <img
-                src={profile}
-                alt="Lanz Sandoval — profile photo"
-                width="240"
-                height="240"
-              />
-            </div>
+          <div className="hero-social" aria-label="Social links">
+            <a href="https://github.com/sndvl-git" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <i className="fa-brands fa-github" />
+            </a>
+            <a href="https://www.linkedin.com/in/lanz-sandoval-12b876416/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <i className="fa-brands fa-linkedin-in" />
+            </a>
+            <a href="https://www.facebook.com/Z.Sndvl" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <i className="fa-brands fa-facebook" />
+            </a>
+            <a href="mailto:lanzerrol.sandoval@gmail.com" aria-label="Email">
+              <i className="fa-regular fa-envelope" />
+            </a>
           </div>
-        </div>
-
-        <div className="hero-social" aria-label="Social links">
-          <a href="https://github.com/sndvl-git" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-            <i className="fa-brands fa-github" />
-          </a>
-          <a href="https://www.linkedin.com/in/lanz-sandoval-12b876416/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <i className="fa-brands fa-linkedin-in" />
-          </a>
-          <a href="https://www.facebook.com/Z.Sndvl" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-            <i className="fa-brands fa-facebook" />
-          </a>
-          <a href="mailto:lanzerrol.sandoval@gmail.com" aria-label="Email">
-            <i className="fa-regular fa-envelope" />
-          </a>
         </div>
       </section>
 
@@ -285,7 +329,7 @@ export default function App() {
                 <p className="section-eyebrow">Featured Work</p>
                 <h2 className="section-heading" id="projects-heading">Recent Projects</h2>
               </div>
-              <a href="#projects" className="view-all">View all <i className="fa-solid fa-arrow-right" /></a>
+              <a href="#projects" className="view-all" onClick={(event) => handleNavClick(event, '#projects')}>View all <i className="fa-solid fa-arrow-right" /></a>
             </div>
 
             <div className="projects-grid">
