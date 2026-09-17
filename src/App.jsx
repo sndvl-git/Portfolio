@@ -5,6 +5,22 @@ import iot from "./assets/iot.png";
 import digi from "./assets/digi.png";
 import vicmar from "./assets/vicmar.png";
 
+import ciscoDevNetCert from "./assets/cisco-devnet.png";
+import ciscoIntroductionCert from "./assets/cisco-introduction.png";
+import pythonCert from "./assets/python.png";
+import cCert from "./assets/c.png";
+import jsCert from "./assets/javascript.png";
+import machineCert from "./assets/machine-learning.png";
+
+const certifications = [
+  { name: 'Cisco DevNet Associate', image: ciscoDevNetCert, description: 'Placeholder summary — describe what this certification covers.' },
+  { name: 'CCNA: Introduction to Networks', image: ciscoIntroductionCert, description: 'Placeholder summary — describe what this certification covers.' },
+  { name: 'Machine Learning', image: machineCert, description: 'Placeholder summary — describe what this certification covers.' },
+  { name: 'Python Programming', image: pythonCert, description: 'Placeholder summary — describe what this certification covers.' },
+  { name: 'C Programming', image: cCert, description: 'Placeholder summary — describe what this certification covers.' },
+  { name: 'JavaScript Essentials', image: jsCert, description: 'Placeholder summary — describe what this certification covers.' },
+];
+
 export default function App() {
   const [navOpen, setNavOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -169,7 +185,7 @@ export default function App() {
   return (
     <>
       <div id="preloader" role="status" aria-label="Loading">
-        <div className="loader-name" aria-hidden="true">Lanz Sandoval</div>
+        <div className="loader-name" aria-hidden="true">please hire me</div>
         <div className="loader-bar-wrap" aria-hidden="true">
           <div className="loader-bar" />
         </div>
@@ -390,52 +406,71 @@ export default function App() {
               </div>
             )}
 
-            {showcaseTab === 'certifications' && (
-              <div className="certification-showcase">
-                <div className="certification-carousel">
-                <button type="button" className="certification-arrow certification-arrow-prev" aria-label="Previous certification" onClick={() => setCertificationIndex((current) => (current + 4) % 5)}>
-                  <i className="fa-solid fa-arrow-left" aria-hidden="true" />
-                </button>
-                {['CCNA: Introduction to Networks', 'Cisco Networking Basics', 'Python Programming', 'C Programming', 'JavaScript Essentials'].map((certification, index) => {
-                  const offset = (index - certificationIndex + 5) % 5;
-                  const position = offset === 0
-                    ? 'active'
-                    : offset === 4
-                      ? 'previous'
-                      : offset === 1
-                        ? 'next'
-                        : 'hidden';
+{showcaseTab === 'certifications' && (
+  <div className="certification-showcase">
+    <div className="certification-carousel">
+      <button type="button" className="certification-arrow certification-arrow-prev" aria-label="Previous certification" onClick={() => setCertificationIndex((current) => (current + certifications.length - 1) % certifications.length)}>
+        <i className="fa-solid fa-arrow-left" aria-hidden="true" />
+      </button>
+      {certifications.map((certification, index) => {
+        const offset = (index - certificationIndex + certifications.length) % certifications.length;
+        const position = offset === 0
+          ? 'active'
+          : offset === certifications.length - 1
+            ? 'previous'
+            : offset === 1
+              ? 'next'
+              : 'hidden';
 
-                  return (
-                    <button
-                      className={`certification-card ${position}`}
-                      type="button"
-                      key={certification}
-                      onClick={() => setSelectedCertification(certification)}
-                      aria-label={`Preview ${certification}`}
-                    >
-                      <img src={profile} alt={`${certification} certificate preview`} />
-                      <h3>{certification}</h3>
-                    </button>
-                  );
-                })}
-                <button type="button" className="certification-arrow certification-arrow-next" aria-label="Next certification" onClick={() => setCertificationIndex((current) => (current + 1) % 5)}>
-                  <i className="fa-solid fa-arrow-right" aria-hidden="true" />
-                </button>
-                </div>
-                <div className="certification-dots" aria-label="Certification carousel position">
-                  {[0, 1, 2, 3, 4].map((index) => (
-                    <button
-                      key={index}
-                      type="button"
-                      className={certificationIndex === index ? 'active' : ''}
-                      aria-label={`Show certification ${index + 1}`}
-                      onClick={() => setCertificationIndex(index)}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
+        return (
+          <button
+            className={`certification-card ${position}`}
+            type="button"
+            key={certification.name}
+            onClick={() => setSelectedCertification(certification)}
+            aria-label={`Preview ${certification.name}`}
+          >
+            <img src={certification.image} alt={`${certification.name} certificate preview`} />
+            <h3>{certification.name}</h3>
+          </button>
+        );
+      })}
+      <button type="button" className="certification-arrow certification-arrow-next" aria-label="Next certification" onClick={() => setCertificationIndex((current) => (current + 1) % certifications.length)}>
+        <i className="fa-solid fa-arrow-right" aria-hidden="true" />
+      </button>
+    </div>
+    <div className="certification-dots" aria-label="Certification carousel position">
+      {certifications.map((certification, index) => (
+        <button
+          key={certification.name}
+          type="button"
+          className={certificationIndex === index ? 'active' : ''}
+          aria-label={`Show certification ${index + 1}`}
+          onClick={() => setCertificationIndex(index)}
+        />
+      ))}
+    </div>
+  </div>
+)}
+
+{selectedCertification && (
+  <div className="certificate-modal-backdrop" role="presentation" onClick={() => setSelectedCertification(null)}>
+    <div
+      className="certificate-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${selectedCertification.name} preview`}
+      onClick={(event) => event.stopPropagation()}
+    >
+      <button type="button" className="modal-close" onClick={() => setSelectedCertification(null)} aria-label="Close certificate preview">
+        <i className="fa-solid fa-xmark" aria-hidden="true" />
+      </button>
+      <img src={selectedCertification.image} alt={`${selectedCertification.name} enlarged preview`} />
+      <h3>{selectedCertification.name}</h3>
+      <p className="certificate-modal-desc">{selectedCertification.description}</p>
+    </div>
+  </div>
+)}
 
 {showcaseTab === 'techstack' && (
   <div className="techstack-panel">
@@ -580,24 +615,6 @@ export default function App() {
               <i className="fa-solid fa-download" aria-hidden="true" />
               Download CV
             </a>
-          </div>
-        </div>
-      )}
-
-      {selectedCertification && (
-        <div className="certificate-modal-backdrop" role="presentation" onClick={() => setSelectedCertification(null)}>
-          <div
-            className="certificate-modal"
-            role="dialog"
-            aria-modal="true"
-            aria-label={`${selectedCertification} preview`}
-            onClick={(event) => event.stopPropagation()}
-          >
-            <button type="button" className="modal-close" onClick={() => setSelectedCertification(null)} aria-label="Close certificate preview">
-              <i className="fa-solid fa-xmark" aria-hidden="true" />
-            </button>
-            <img src={profile} alt={`${selectedCertification} enlarged preview`} />
-            <h3>{selectedCertification}</h3>
           </div>
         </div>
       )}

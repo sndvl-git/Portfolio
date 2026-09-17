@@ -1074,7 +1074,7 @@
   justify-content: center;
   min-height: 320px;
   overflow: hidden;
-  perspective: 1200px; /* enables the 3D rotation effect below */
+  perspective: 1200px;
 }
 
 .certification-card {
@@ -1231,7 +1231,7 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background: rgba(3, 7, 18, 0.78);
+  background: transparent;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   animation: modal-fade-in 0.25s ease both;
@@ -1246,6 +1246,15 @@
   background: var(--bg-card);
   box-shadow: 0 24px 70px rgba(0,0,0,0.38);
   animation: modal-rise-in 0.35s var(--ease) both;
+}
+
+.certificate-modal-desc {
+  margin: 0.6rem auto 0;
+  max-width: 46rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  text-align: center;
 }
 
 .certificate-modal img {
