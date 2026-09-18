@@ -11,6 +11,7 @@ import pythonCert from "./assets/python.png";
 import cCert from "./assets/c.png";
 import jsCert from "./assets/javascript.png";
 import machineCert from "./assets/machine-learning.png";
+import cv from "./assets/cv.png";
 
 const certifications = [
   { name: 'Cisco DevNet Associate', image: ciscoDevNetCert, description: 'Placeholder summary — describe what this certification covers.' },
@@ -609,9 +610,9 @@ export default function App() {
             </button>
             <span className="cv-modal-label">CV Preview</span>
             <div className="cv-preview">
-              <img src={profile} alt="Lanz Sandoval CV preview" />
+              <img src={cv} alt="Lanz Sandoval CV preview" />
             </div>
-            <a className="btn-primary cv-download" href="/Lanz-Sandoval-CV.pdf" download>
+            <a className="btn-primary cv-download" href="/assets/sandoval-resume.pdf" download>
               <i className="fa-solid fa-download" aria-hidden="true" />
               Download CV
             </a>
