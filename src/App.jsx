@@ -12,6 +12,7 @@ import cCert from "./assets/c.png";
 import jsCert from "./assets/javascript.png";
 import machineCert from "./assets/machine-learning.png";
 import cv from "./assets/cv.png";
+import cvPdf from "./assets/sandoval-resume.pdf";
 
 const certifications = [
   { name: 'Cisco DevNet Associate', image: ciscoDevNetCert, description: 'Placeholder summary — describe what this certification covers.' },
@@ -22,11 +23,14 @@ const certifications = [
   { name: 'JavaScript Essentials', image: jsCert, description: 'Placeholder summary — describe what this certification covers.' },
 ];
 
+const contactEmail = 'lanzerrol.sandoval@gmail.com';
+
 export default function App() {
   const [navOpen, setNavOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isCvOpen, setIsCvOpen] = useState(false);
+  const [isThankYouVisible, setIsThankYouVisible] = useState(false);
   const [showcaseTab, setShowcaseTab] = useState('projects');
   const [selectedCertification, setSelectedCertification] = useState(null);
   const [certificationIndex, setCertificationIndex] = useState(0);
@@ -40,6 +44,13 @@ export default function App() {
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDarkMode);
   }, [isDarkMode]);
+
+  useEffect(() => {
+    if (!isThankYouVisible) return undefined;
+
+    const timer = window.setTimeout(() => setIsThankYouVisible(false), 6500);
+    return () => window.clearTimeout(timer);
+  }, [isThankYouVisible]);
 
   useEffect(() => {
     const preloader = document.getElementById('preloader');
@@ -178,15 +189,19 @@ export default function App() {
       `Name: ${formData.name || 'Not provided'}\nAddress: ${formData.address || 'Not provided'}\n\nMessage:\n${formData.message || 'No message provided'}`
     );
 
-    window.location.href = `mailto:lanzerrol.sandoval@gmail.com?subject=${subject}&body=${body}`;
+    const mailtoUrl = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
+    setIsThankYouVisible(true);
     closeContactModal();
     setFormData({ name: '', address: '', message: '' });
+    window.setTimeout(() => {
+      window.location.href = mailtoUrl;
+    }, 150);
   };
 
   return (
     <>
       <div id="preloader" role="status" aria-label="Loading">
-        <div className="loader-name" aria-hidden="true">please hire me</div>
+        <div className="loader-name" aria-hidden="true">Loading Portfolio</div>
         <div className="loader-bar-wrap" aria-hidden="true">
           <div className="loader-bar" />
         </div>
@@ -292,7 +307,7 @@ export default function App() {
             <a href="https://www.facebook.com/Z.Sndvl" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
               <i className="fa-brands fa-facebook" />
             </a>
-            <a href="mailto:lanzerrol.sandoval@gmail.com" aria-label="Email">
+            <a href={`mailto:${contactEmail}`} aria-label="Email">
               <i className="fa-regular fa-envelope" />
             </a>
           </div>
@@ -348,8 +363,8 @@ export default function App() {
                 <div className="personal-details-grid">
                   <div><span>Full name</span><strong>Lanz Errol P. Sandoval</strong></div>
                   <div><span>Location</span><strong>Bauan, Batangas, Philippines</strong></div>
-                  <div><span>Phone</span><strong>+63 917 123 4567</strong></div>
-                  <div><span>Email</span><strong>lanzerrol.sandoval@gmail.com</strong></div>
+                  <div><span>Phone</span><strong>+63 966 955 8474</strong></div>
+                  <div><span>Email</span><strong>{contactEmail}</strong></div>
                   <div><span>Education</span><strong>University of Batangas</strong></div>
                   <div><span>Age</span><strong>23</strong></div>
                 </div>
@@ -474,7 +489,7 @@ export default function App() {
 )}
 
 {showcaseTab === 'techstack' && (
-  <div className="techstack-panel">
+  <div className="techstack-panel animate">
     <div className="tech-category" style={{ '--i': 0 }}>
       <p className="tech-category-title">Frontend</p>
       <ul className="tech-list">
@@ -609,14 +624,33 @@ export default function App() {
               <i className="fa-solid fa-xmark" aria-hidden="true" />
             </button>
             <span className="cv-modal-label">CV Preview</span>
-            <div className="cv-preview">
-              <img src={cv} alt="Lanz Sandoval CV preview" />
+            <div className="cv-modal-content">
+              <div className="cv-preview">
+                <img src={cv} alt="Lanz Sandoval CV preview" />
+              </div>
+              <div className="cv-summary">
+                <h3>Lanz Sandoval</h3>
+                <p>Computer Engineering graduate with hands-on experience across web development, networking, hardware, and IoT projects. Explore my education, technical skills, and project experience in my CV.</p>
+                <a className="btn-primary cv-download" href={cvPdf} download="Lanz-Sandoval-CV.pdf">
+                  <i className="fa-solid fa-download" aria-hidden="true" />
+                  Download CV
+                </a>
+              </div>
             </div>
-            <a className="btn-primary cv-download" href="/assets/sandoval-resume.pdf" download>
-              <i className="fa-solid fa-download" aria-hidden="true" />
-              Download CV
-            </a>
           </div>
+        </div>
+      )}
+
+      {isThankYouVisible && (
+        <div className="contact-toast" role="status" aria-live="polite">
+          <i className="fa-solid fa-circle-check" aria-hidden="true" />
+          <div className="contact-toast-copy">
+            <strong>Thank you for reaching out!</strong>
+            <span>Your email draft is ready. Send it in your mail app to deliver your message.</span>
+          </div>
+          <button type="button" onClick={() => setIsThankYouVisible(false)} aria-label="Dismiss notification">
+            <i className="fa-solid fa-xmark" aria-hidden="true" />
+          </button>
         </div>
       )}
 
