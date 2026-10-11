@@ -786,15 +786,18 @@
           transform: translateX(0);
         }
 
-        .about-stats .stat-card:nth-child(2) { transition-delay: 0.15s; }
-        .about-stats .stat-card:nth-child(3) { transition-delay: 0.3s; }
+        .about-stats .stat-card:nth-child(2) { transition-delay: 0.15s, 0s, 0s, 0s; }
+        .about-stats .stat-card:nth-child(3) { transition-delay: 0.3s, 0s, 0s, 0s; }
 
         .about-stats .stat-card {
           background: transparent;
           border-color: var(--border);
         }
 
-        .about-stats .stat-card:hover { border-color: #ffffff; }
+        .about-stats .stat-card:hover {
+          border-color: var(--accent);
+          transition-delay: 0s;
+        }
         .about-stats .stat-num { color: var(--text); }
         .about-stats .stat-desc { color: var(--text-muted); }
         .about-stats .stat-icon { color: #ffffff; background: #0b0b0b; border-color: #0b0b0b; }
@@ -1248,13 +1251,10 @@
   animation: modal-rise-in 0.35s var(--ease) both;
 }
 
-.certificate-modal-desc {
-  margin: 0.6rem auto 0;
-  max-width: 46rem;
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  line-height: 1.6;
-  text-align: center;
+.certificate-modal .modal-close {
+  z-index: 1;
+  background: var(--bg-card);
+  color: var(--text);
 }
 
 .certificate-modal img {

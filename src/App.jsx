@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import './styles.css';
 import profile from "./assets/muka.png";
 import iot from "./assets/iot.png";
@@ -15,12 +16,12 @@ import cv from "./assets/cv.png";
 import cvPdf from "./assets/sandoval-resume.pdf";
 
 const certifications = [
-  { name: 'Cisco DevNet Associate', image: ciscoDevNetCert, description: 'Placeholder summary — describe what this certification covers.' },
-  { name: 'CCNA: Introduction to Networks', image: ciscoIntroductionCert, description: 'Placeholder summary — describe what this certification covers.' },
-  { name: 'Machine Learning', image: machineCert, description: 'Placeholder summary — describe what this certification covers.' },
-  { name: 'Python Programming', image: pythonCert, description: 'Placeholder summary — describe what this certification covers.' },
-  { name: 'C Programming', image: cCert, description: 'Placeholder summary — describe what this certification covers.' },
-  { name: 'JavaScript Essentials', image: jsCert, description: 'Placeholder summary — describe what this certification covers.' },
+  { name: 'Cisco DevNet Associate', image: ciscoDevNetCert },
+  { name: 'CCNA: Introduction to Networks', image: ciscoIntroductionCert },
+  { name: 'Machine Learning', image: machineCert },
+  { name: 'Python Programming', image: pythonCert },
+  { name: 'C Programming', image: cCert },
+  { name: 'JavaScript Essentials', image: jsCert },
 ];
 
 const contactEmail = 'lanzerrol.sandoval@gmail.com';
@@ -134,6 +135,7 @@ export default function App() {
   const closeNav = () => setNavOpen(false);
   const handleNavClick = (event, target) => {
     event.preventDefault();
+    window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
     closeNav();
     const destination = document.querySelector(target);
 
@@ -170,7 +172,6 @@ export default function App() {
     };
 
     scrollFrameRef.current = requestAnimationFrame(animateScroll);
-    window.history.replaceState(null, '', target);
   };
   const openContactModal = () => setIsContactOpen(true);
   const closeContactModal = () => setIsContactOpen(false);
@@ -306,9 +307,6 @@ export default function App() {
             </a>
             <a href="https://www.facebook.com/Z.Sndvl" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
               <i className="fa-brands fa-facebook" />
-            </a>
-            <a href={`mailto:${contactEmail}`} aria-label="Email">
-              <i className="fa-regular fa-envelope" />
             </a>
           </div>
         </div>
@@ -469,7 +467,7 @@ export default function App() {
   </div>
 )}
 
-{selectedCertification && (
+{selectedCertification && createPortal(
   <div className="certificate-modal-backdrop" role="presentation" onClick={() => setSelectedCertification(null)}>
     <div
       className="certificate-modal"
@@ -483,9 +481,9 @@ export default function App() {
       </button>
       <img src={selectedCertification.image} alt={`${selectedCertification.name} enlarged preview`} />
       <h3>{selectedCertification.name}</h3>
-      <p className="certificate-modal-desc">{selectedCertification.description}</p>
     </div>
-  </div>
+  </div>,
+  document.body
 )}
 
 {showcaseTab === 'techstack' && (
