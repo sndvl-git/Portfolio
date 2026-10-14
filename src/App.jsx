@@ -396,7 +396,7 @@ export default function App() {
                     <span className="showcase-index">01 / IoT</span>
                     <h3>Smart Pipeline</h3>
                     <p>Real-time leak detection for water pipelines using flow sensors, microcontroller processing, and GSM alerts.</p>
-                    <a href="https://water-monitoring-dashboard-six.vercel.app/" target="_blank" rel="noopener noreferrer">Details <i className="fa-solid fa-arrow-up-right-from-square" /></a>
+                    <a href="https://water-iot-dashboard.vercel.app/" target="_blank" rel="noopener noreferrer">Details <i className="fa-solid fa-arrow-up-right-from-square" /></a>
                   </div>
                 </article>
                 <article className="showcase-project-card">
