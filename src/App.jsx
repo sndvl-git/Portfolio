@@ -274,6 +274,25 @@ export default function App() {
         </div>
       </header>
 
+      <nav className="mobile-quick-nav" aria-label="Quick navigation">
+        <a href="#hero" onClick={(event) => handleNavClick(event, '#hero')}>
+          <i className="fa-solid fa-house" aria-hidden="true" />
+          <span>Home</span>
+        </a>
+        <a href="#about" onClick={(event) => handleNavClick(event, '#about')}>
+          <i className="fa-solid fa-user" aria-hidden="true" />
+          <span>About</span>
+        </a>
+        <a href="#projects" onClick={(event) => handleNavClick(event, '#projects')}>
+          <i className="fa-solid fa-briefcase" aria-hidden="true" />
+          <span>Projects</span>
+        </a>
+        <button type="button" onClick={openContactModal}>
+          <i className="fa-regular fa-paper-plane" aria-hidden="true" />
+          <span>Contact</span>
+        </button>
+      </nav>
+
       <section id="hero" aria-labelledby="hero-name">
         <div className="hero-grid-lines" aria-hidden="true" />
         <div className="hero-stage">
@@ -553,7 +572,7 @@ export default function App() {
               </p>
               <button type="button" className="btn-primary" onClick={openContactModal}>
                 <i className="fa-regular fa-paper-plane" aria-hidden="true" />
-                Say Hello
+                Contact Me
               </button>
             </div>
           </section>
