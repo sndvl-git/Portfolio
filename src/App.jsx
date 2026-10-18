@@ -568,7 +568,7 @@ export default function App() {
               <p className="section-eyebrow" style={{ justifyContent: 'center' }}>Get in touch</p>
               <h2 className="contact-heading" id="contact-heading">Let's build<br />something great.</h2>
               <p className="contact-sub">
-                Whether you have a project in mind, a role to discuss, or just want to say hello, my inbox is always open.
+                Whether you have a project in mind, or a role to discuss, my inbox is always open.
               </p>
               <button type="button" className="btn-primary" onClick={openContactModal}>
                 <i className="fa-regular fa-paper-plane" aria-hidden="true" />
