@@ -32,6 +32,8 @@ export default function App() {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isCvOpen, setIsCvOpen] = useState(false);
   const [isThankYouVisible, setIsThankYouVisible] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionError, setSubmissionError] = useState('');
   const [showcaseTab, setShowcaseTab] = useState('projects');
   const [selectedCertification, setSelectedCertification] = useState(null);
   const [certificationIndex, setCertificationIndex] = useState(0);
@@ -45,13 +47,6 @@ export default function App() {
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDarkMode);
   }, [isDarkMode]);
-
-  useEffect(() => {
-    if (!isThankYouVisible) return undefined;
-
-    const timer = window.setTimeout(() => setIsThankYouVisible(false), 6500);
-    return () => window.clearTimeout(timer);
-  }, [isThankYouVisible]);
 
   useEffect(() => {
     const preloader = document.getElementById('preloader');
@@ -182,21 +177,42 @@ export default function App() {
     setFormData((current) => ({ ...current, [name]: value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    if (isSubmitting) return;
 
-    const subject = encodeURIComponent(`New contact from ${formData.name || 'a visitor'}`);
-    const body = encodeURIComponent(
-      `Name: ${formData.name || 'Not provided'}\nAddress: ${formData.address || 'Not provided'}\n\nMessage:\n${formData.message || 'No message provided'}`
-    );
+    setIsSubmitting(true);
+    setSubmissionError('');
 
-    const mailtoUrl = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
-    setIsThankYouVisible(true);
-    closeContactModal();
-    setFormData({ name: '', address: '', message: '' });
-    window.setTimeout(() => {
-      window.location.href = mailtoUrl;
-    }, 150);
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${contactEmail}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.address,
+          message: formData.message,
+          _subject: `New contact from ${formData.name}`,
+          _template: 'table',
+        }),
+      });
+      const result = await response.json();
+
+      if (!response.ok || result.success === 'false' || result.success === false) {
+        throw new Error('Message could not be sent. Please try again.');
+      }
+
+      closeContactModal();
+      setIsThankYouVisible(true);
+      setFormData({ name: '', address: '', message: '' });
+    } catch {
+      setSubmissionError('Message could not be sent. Please check your connection and try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -559,9 +575,7 @@ export default function App() {
 
             <p className="section-eyebrow">Contact form</p>
             <h3 id="contact-modal-title">Get in touch</h3>
-            <p className="modal-copy">
-              Share a few details below and I’ll receive your message directly in my inbox.
-            </p>
+            <p className="modal-copy">Share a few details and I’ll get back to you.</p>
 
             <form className="contact-form" onSubmit={handleSubmit}>
               <label>
@@ -577,13 +591,13 @@ export default function App() {
               </label>
 
               <label>
-                <span>Address</span>
+                <span>Email address</span>
                 <input
-                  type="text"
+                  type="email"
                   name="address"
                   value={formData.address}
                   onChange={handleInputChange}
-                  placeholder="Your address"
+                  placeholder="you@example.com"
                   required
                 />
               </label>
@@ -600,9 +614,11 @@ export default function App() {
                 />
               </label>
 
-              <button type="submit" className="btn-primary form-submit">
-                <i className="fa-regular fa-paper-plane" aria-hidden="true" />
-                Get in Touch
+              {submissionError && <p className="contact-form-error" role="alert">{submissionError}</p>}
+
+              <button type="submit" className="btn-primary form-submit" disabled={isSubmitting} aria-busy={isSubmitting}>
+                <i className={isSubmitting ? 'fa-solid fa-spinner form-submit-spinner' : 'fa-regular fa-paper-plane'} aria-hidden="true" />
+                {isSubmitting ? 'Sending...' : 'Get in Touch'}
               </button>
             </form>
           </div>
@@ -640,15 +656,15 @@ export default function App() {
       )}
 
       {isThankYouVisible && (
-        <div className="contact-toast" role="status" aria-live="polite">
-          <i className="fa-solid fa-circle-check" aria-hidden="true" />
-          <div className="contact-toast-copy">
-            <strong>Thank you for reaching out!</strong>
-            <span>Your email draft is ready. Send it in your mail app to deliver your message.</span>
+        <div className="contact-modal-backdrop" role="presentation" onClick={() => setIsThankYouVisible(false)}>
+          <div className="contact-success-modal" role="dialog" aria-modal="true" aria-labelledby="contact-success-title" onClick={(event) => event.stopPropagation()}>
+            <button type="button" className="modal-close" onClick={() => setIsThankYouVisible(false)} aria-label="Close message confirmation">
+              <i className="fa-solid fa-xmark" aria-hidden="true" />
+            </button>
+            <i className="fa-solid fa-circle-check contact-success-icon" aria-hidden="true" />
+            <h3 id="contact-success-title">Message submitted</h3>
+            <p>Thanks for reaching out. I’ll be in touch soon.</p>
           </div>
-          <button type="button" onClick={() => setIsThankYouVisible(false)} aria-label="Dismiss notification">
-            <i className="fa-solid fa-xmark" aria-hidden="true" />
-          </button>
         </div>
       )}
 

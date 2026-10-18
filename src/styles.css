@@ -1533,44 +1533,6 @@
           animation: modal-fade-in 0.25s ease both;
         }
 
-        .contact-toast {
-          position: fixed;
-          right: clamp(1rem, 3vw, 2rem);
-          bottom: clamp(1rem, 3vw, 2rem);
-          z-index: 200;
-          display: grid;
-          grid-template-columns: auto minmax(0, 1fr) auto;
-          align-items: start;
-          gap: 0.85rem;
-          width: min(440px, calc(100vw - 2rem));
-          padding: 1rem 1.1rem;
-          border: 1px solid var(--border);
-          border-radius: 12px;
-          background: var(--bg-card);
-          color: var(--text);
-          box-shadow: 0 16px 40px rgba(17, 24, 39, 0.16);
-          animation: contact-toast-in 0.4s var(--ease) both;
-        }
-
-        .contact-toast > i { color: #2f855a; margin-top: 0.2rem; }
-
-        .contact-toast-copy { display: grid; gap: 0.25rem; }
-        .contact-toast-copy strong { font-size: 0.9rem; }
-        .contact-toast-copy span { color: var(--text-muted); font-size: 0.8rem; line-height: 1.5; }
-
-        .contact-toast button {
-          border: 0;
-          padding: 0.15rem;
-          background: transparent;
-          color: var(--text-muted);
-          cursor: pointer;
-        }
-
-        @keyframes contact-toast-in {
-          from { opacity: 0; transform: translateY(12px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-
         .contact-modal {
           width: min(100%, 520px);
           background: var(--bg-card);
@@ -1780,6 +1742,40 @@
           width: fit-content;
           margin-top: 0.25rem;
         }
+
+        .form-submit:disabled { cursor: wait; opacity: 0.75; }
+
+        .form-submit-spinner { animation: form-submit-spin 0.8s linear infinite; }
+
+        @keyframes form-submit-spin { to { transform: rotate(360deg); } }
+
+        .contact-form-error {
+          color: #c53030;
+          font-size: 0.875rem;
+        }
+
+        .contact-success-modal {
+          position: relative;
+          width: min(100%, 440px);
+          padding: 2.5rem 2rem;
+          border: 1px solid var(--border);
+          border-radius: 20px;
+          background: var(--bg-card);
+          color: var(--text);
+          box-shadow: 0 24px 70px rgba(0,0,0,0.38);
+          text-align: center;
+          animation: modal-rise-in 0.35s var(--ease) both;
+        }
+
+        .contact-success-icon { color: #2f855a; font-size: 2.25rem; }
+
+        .contact-success-modal h3 {
+          margin-top: 1rem;
+          font-family: 'Syne', sans-serif;
+          font-size: 1.5rem;
+        }
+
+        .contact-success-modal p { margin-top: 0.5rem; color: var(--text-muted); }
 
         .contact-heading {
           font-family: 'Syne', sans-serif;
