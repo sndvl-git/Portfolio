@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-const basePath = process.env.BASE_PATH ?? '/';
+const basePath = process.env.BASE_PATH ?? '/Portfolio/';
 
 export default defineConfig({
   plugins: [react()],
